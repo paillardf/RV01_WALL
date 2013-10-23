@@ -37,17 +37,17 @@ Material:
       data:
         first:
           name: _Cutoff
-        second: .5
+        second: .514925361
       data:
         first:
           name: _Shininess
-        second: .078125
+        second: .00999999978
     m_Colors:
       data:
         first:
           name: _Color
-        second: {r: .36470589, g: .298039228, b: .223529428, a: 1}
+        second: {r: .709803939, g: .512102485, b: .370211452, a: 1}
       data:
         first:
           name: _SpecColor
-        second: {r: .5, g: .5, b: .5, a: 0}
+        second: {r: .97647059, g: .97647059, b: .97647059, a: 0}
