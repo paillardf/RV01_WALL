@@ -5,7 +5,7 @@ var xRotSpeed = 270.0;
 var yRotSpeed = 140.0;
 
 var zoomSpeed = 0.1;
-var moveSpeed = 15;
+var moveSpeed = 20;
 var verticalSpeed = 6;
 var yMinLimit = -20;
 var yMaxLimit = 80;
@@ -51,25 +51,25 @@ function LateUpdate () {
 	 		 
 	        
 	   }
-	   if (Input.GetButton ("Up")){
+	   if (Input.GetKey (KeyCode.UpArrow)){
 	    dir = Camera.main.transform.forward;
 	    dir.y = 0;
 	    dir.Normalize();
 	 	target.transform.Translate(dir * Time.deltaTime * moveSpeed, target);
 	   }
-	   if (Input.GetButton ("Down")){
+	   if (Input.GetKey (KeyCode.DownArrow)){
 	    dir = -Camera.main.transform.forward;
 	    dir.y = 0;
 	    dir.Normalize();
 	 	target.transform.Translate(dir * Time.deltaTime * moveSpeed, target);
 	   }
-	    if (Input.GetButton ("Left")){
+	    if (Input.GetKey (KeyCode.LeftArrow)){
 	    dir = -Camera.main.transform.right;
 	    dir.y = 0;
 	    dir.Normalize();
 	 	target.transform.Translate(dir * Time.deltaTime * moveSpeed, target);
 	   }
-	    if (Input.GetButton ("Right")){
+	    if (Input.GetKey (KeyCode.RightArrow)){
 	    dir = Camera.main.transform.right;
 	    dir.y = 0;
 	    dir.Normalize();

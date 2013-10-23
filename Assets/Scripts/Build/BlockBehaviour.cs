@@ -139,9 +139,15 @@ public class BlockBehaviour : MonoBehaviour {
 	
 	void moveNotify(){
 		for(int i = 0; i<colliders.Count; i++){
-			if(colliders[i]!=null&&colliders[i].transform!=null){
-				colliders[i].transform.SendMessage("checkGravityTotal");
-			}
+		
+				Collision c = colliders[i];
+				if(!c.Equals(null)){
+					if(!(c.collider==null)){
+						print("ok");
+						c.collider.SendMessage("checkGravityTotal");
+					}
+				}
+			
 			
 		}
 		colliders.Clear();
