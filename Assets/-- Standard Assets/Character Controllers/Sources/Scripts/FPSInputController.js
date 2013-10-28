@@ -1,14 +1,20 @@
 private var motor : CharacterMotor;
+private var m_animator : Animator;
 
 // Use this for initialization
 function Awake () {
 	motor = GetComponent(CharacterMotor);
 }
 
+function Start() {
+	m_animator = GetComponent(Animator);
+}
+
 // Update is called once per frame
 function Update () {
 	// Get the input vector from kayboard or analog stick
 	var directionVector = new Vector3(Input.GetAxis("Horizontal"), 0, Input.GetAxis("Vertical"));
+	m_animator.SetFloat("Direction",directionVector.x);
 	
 	if (directionVector != Vector3.zero) {
 		// Get the length of the directon vector and then normalize it
@@ -25,6 +31,12 @@ function Update () {
 		
 		// Multiply the normalized direction vector by the modified length
 		directionVector = directionVector * directionLength;
+		
+		m_animator.SetFloat("Speed", 1);
+	}
+	
+	else {
+		m_animator.SetFloat("Speed", 0);
 	}
 	
 	// Apply the direction to the CharacterMotor
