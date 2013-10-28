@@ -2491,7 +2491,6 @@ GameObject:
   - 92: {fileID: 1352102435}
   - 124: {fileID: 1352102434}
   - 81: {fileID: 1352102433}
-  - 114: {fileID: 1352102438}
   m_Layer: 0
   m_Name: Main Camera
   m_TagString: MainCamera
@@ -2555,22 +2554,10 @@ Transform:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1352102432}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 5.59528637, y: 1.7514441, z: -7.8652792}
+  m_LocalPosition: {x: .00450992584, y: 1.65086865, z: .226459026}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
-  m_Father: {fileID: 0}
---- !u!114 &1352102438
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 1352102432}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 1af030be2e0031a48b70b451ad04a34c, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_character: {fileID: 1614494293}
+  m_Father: {fileID: 1614494294}
 --- !u!1 &1417379707
 GameObject:
   m_ObjectHideFlags: 0
@@ -2797,6 +2784,7 @@ Transform:
   m_Children:
   - {fileID: 505220298}
   - {fileID: 2021874621}
+  - {fileID: 1352102437}
   m_Father: {fileID: 0}
 --- !u!95 &1614494295
 Animator:
