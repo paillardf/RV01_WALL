@@ -9,7 +9,7 @@ GameObject:
   m_Component:
   - 4: {fileID: 400000}
   - 20: {fileID: 2000000}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: Water4Example (Advanced)ReflectionMain Camera
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -24,7 +24,7 @@ GameObject:
   serializedVersion: 4
   m_Component:
   - 4: {fileID: 400002}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: Specular
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -42,7 +42,7 @@ GameObject:
   - 33: {fileID: 3300000}
   - 23: {fileID: 2300000}
   - 114: {fileID: 11400000}
-  m_Layer: 4
+  m_Layer: 10
   m_Name: Tile
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -59,7 +59,7 @@ GameObject:
   - 4: {fileID: 400006}
   - 114: {fileID: 11400002}
   - 154: {fileID: 15400000}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: Island
   m_TagString: no-placement-collide
   m_Icon: {fileID: 0}
@@ -78,7 +78,7 @@ GameObject:
   - 114: {fileID: 11400010}
   - 114: {fileID: 11400006}
   - 114: {fileID: 11400008}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: Water4Example (Advanced)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -94,7 +94,7 @@ GameObject:
   m_Component:
   - 4: {fileID: 400010}
   - 20: {fileID: 2000002}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: Water4Example (Advanced)ReflectionSceneCamera
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -112,7 +112,7 @@ GameObject:
   - 33: {fileID: 3300002}
   - 23: {fileID: 2300002}
   - 114: {fileID: 11400012}
-  m_Layer: 4
+  m_Layer: 10
   m_Name: Tile
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -130,7 +130,7 @@ GameObject:
   - 33: {fileID: 3300004}
   - 23: {fileID: 2300004}
   - 114: {fileID: 11400014}
-  m_Layer: 4
+  m_Layer: 10
   m_Name: Tile
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -148,7 +148,7 @@ GameObject:
   - 33: {fileID: 3300006}
   - 23: {fileID: 2300006}
   - 114: {fileID: 11400016}
-  m_Layer: 4
+  m_Layer: 10
   m_Name: Tile
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -171,14 +171,30 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
+--- !u!1 &100020
+GameObject:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  serializedVersion: 4
+  m_Component:
+  - 4: {fileID: 400020}
+  - 114: {fileID: 11400018}
+  m_Layer: 0
+  m_Name: A*
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
 --- !u!4 &400000
 Transform:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 100000}
-  m_LocalRotation: {x: -.13136895, y: 0, z: 0, w: .991333544}
-  m_LocalPosition: {x: 1063.5553, y: -4.13746262, z: 940.629639}
+  m_LocalRotation: {x: -.272762239, y: 0, z: 0, w: .962081492}
+  m_LocalPosition: {x: 1060, y: 16.1315346, z: 932.088379}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 400006}
@@ -211,9 +227,10 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 100006}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -1000, y: -1, z: -1000}
+  m_LocalPosition: {x: -1000, y: 0, z: -1000}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
+  - {fileID: 400020}
   - {fileID: 400018}
   - {fileID: 400008}
   - {fileID: 400000}
@@ -241,8 +258,8 @@ Transform:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 100010}
-  m_LocalRotation: {x: -.13136895, y: 0, z: 0, w: .991333544}
-  m_LocalPosition: {x: 1063.5553, y: 23.8687897, z: 940.629639}
+  m_LocalRotation: {x: .194960281, y: .629359782, z: .16729559, w: -.733422756}
+  m_LocalPosition: {x: 1067.1488, y: 18.563942, z: 947.983093}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 400006}
@@ -287,6 +304,17 @@ Transform:
   m_GameObject: {fileID: 100018}
   m_LocalRotation: {x: .320428222, y: .149418131, z: .25616166, w: .899656177}
   m_LocalPosition: {x: 945.182251, y: 79.604393, z: 928.734192}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 400006}
+--- !u!4 &400020
+Transform:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 100020}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 1000, y: 0, z: 1000}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 400006}
@@ -614,6 +642,94 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   reflection: {fileID: 11400006}
   waterBase: {fileID: 11400004}
+--- !u!114 &11400018
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 100020}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 78396926cbbfc4ac3b48fc5fc34a87d1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  astarData:
+    hasBeenReverted: 0
+    data: 504b030414000008080033865d434cce75dfc80100007d0300000b0024006772617068302e6a736f6e0a0020000000000001001800a85d4479bed4ce01a85d4479bed4ce01a85d4479bed4ce015d525d73da3010fc2b1d3d930c06bb18bfa5d090cca44d26a4d3e7c33ab00659f2e8a30132fcf79e643098177fecad6ef7f6f4c5365e70567cb17f203db282c174c2c7c3499ae7693e2e27fc2e1f4dc7e97434fe8e7c94603e64c70103db60e9dec109cd8a64c08c76e15b85463b560c076c1f9f077a12bd44e5d0f48ae3ec3e4f922c4b3b9257a584ba41be14073c71b361cba6373194e6d81633eaa9a514f6a4e9f64df03e83c67a896cc0b8801aa326b9ab506c2ac78ad1d5a9d7f5daa28b6e0cece7c2d03cb119fba15d451d6ab0dbab5c827edbe757bf709750656d74fd7452498267578972fb0efb122c416b9016fbe0fcdaa06f7ad92497e0ce76671596a4ea8cc7b38f1ee4d527c82dac24fead50fdd60ba3bde26df51886d9cda4a857d4f53ebdfc3eec848d72042ca50e194ec9021a0afa99ccc59dda688bb0e0e38fc50fd8d86ea413fc288c755488cdc03bfd22d4766104bf30cfe85c58f7226a1193a29d865956da1b62b29f31411adbbb99360a03d8ced7a002e9f66fa4e6fadbbba9747a37f823944eb7699f2a0f6a4357e5861ec18e1b3629149d07f9d6d6a32405a5cec614ad919c8759bf2d0c34e1ea70039f0b71a875675fa8b55e960651bdc6b351f4f81f504b030414000008080033865d43a2bd252e7e000000c900000010002400636f6e6e656374696f6e732e6a736f6e0a002000000000000100180070964579bed4ce0170964579bed4ce0170964579bed4ce01758ebd0ec2300c84dfe5e60c84316b1f00b60e882150232a223b6acd4fa8faee98802a1696937c9ff5e97613b24798f0405839949a4fcbd921afbfc057e02bf006b464424023cc74d45e180e9d6c6e3434322ac229a6911c6429cc294c6d2c0b238e8764121dae76ddfb4ecff5eda36963bafcf23ff2ad5992be37cffb17504b030414000008080033865d43287e18aa4300000048000000120024006772617068305f656469746f722e6a736f6e0a0020000000000001001800a2e44579bed4ce01a2e44579bed4ce01a2e44579bed4ce01ab56cac94fce4e4d51b22a292a4dd5512acec82f77ad28294a54b24a4bcc29068a94a456949416a58665166726e5a4c2d4156496e59728592939a7e695a41629d50200504b030414000008080033865d4303edfb507600000085000000090024006d6574612e6a736f6e0a0020000000000001001800d4324679bed4ce01d4324679bed4ce01d4324679bed4ce011d8cbb0ec23010c0fee5e612e505b97465e886d85187883bda0c24559a2221c4bfd3b079b0fd81179735e6043d18a1c55128e8602a619957e8d58e5ba49d6e10bc23239d45b468ee8e0ea8bdb15e9b1393568c12c60eea7be14b78f2bfb8863a3f62a2982631944843bb362b65e273de526d9a1cbf3f504b01022d0014000008080033865d434cce75dfc80100007d0300000b00240000000000000000000000000000006772617068302e6a736f6e0a0020000000000001001800a85d4479bed4ce01a85d4479bed4ce01a85d4479bed4ce01504b01022d0014000008080033865d43a2bd252e7e000000c9000000100024000000000000000000000015020000636f6e6e656374696f6e732e6a736f6e0a002000000000000100180070964579bed4ce0170964579bed4ce0170964579bed4ce01504b01022d0014000008080033865d43287e18aa43000000480000001200240000000000000000000000e50200006772617068305f656469746f722e6a736f6e0a0020000000000001001800a2e44579bed4ce01a2e44579bed4ce01a2e44579bed4ce01504b01022d0014000008080033865d4303edfb50760000008500000009002400000000000000000000007c0300006d6574612e6a736f6e0a0020000000000001001800d4324679bed4ce01d4324679bed4ce01d4324679bed4ce01504b050600000000040004007e0100003d0400000000
+    data_backup: 
+    data_cachedStartup: 
+    revertData: 
+    cacheStartup: 0
+    compress: 0
+  showNavGraphs: 1
+  showUnwalkableNodes: 1
+  debugMode: 0
+  debugFloor: 0
+  debugRoof: 20000
+  showSearchTree: 0
+  unwalkableNodeDebugSize: .300000012
+  stepByStep: 1
+  logPathResults: 1
+  maxNearestNodeDistance: 100
+  scanOnStartup: 1
+  fullGetNearestSearch: 0
+  prioritizeGraphs: 0
+  prioritizeGraphsLimit: 1
+  colorSettings:
+    _NodeConnection: {r: 1, g: 1, b: 1, a: .899999976}
+    _UnwalkableNode: {r: 1, g: 0, b: 0, a: .5}
+    _BoundsHandles: {r: .289999992, g: .453999996, b: .740999997, a: .899999976}
+    _ConnectionLowLerp: {r: 0, g: 1, b: 0, a: .5}
+    _ConnectionHighLerp: {r: 1, g: 0, b: 0, a: .5}
+    _MeshEdgeColor: {r: 0, g: 0, b: 0, a: .5}
+    _MeshColor: {r: .125, g: .68599999, b: 0, a: .189999998}
+    _AreaColors: []
+  tagNames:
+  - Basic Ground
+  - 1
+  - 2
+  - 3
+  - 4
+  - 5
+  - 6
+  - 7
+  - 8
+  - 9
+  - 10
+  - 11
+  - 12
+  - 13
+  - 14
+  - 15
+  - 16
+  - 17
+  - 18
+  - 19
+  - 20
+  - 21
+  - 22
+  - 23
+  - 24
+  - 25
+  - 26
+  - 27
+  - 28
+  - 29
+  - 30
+  - 31
+  heuristic: 2
+  heuristicScale: 1
+  threadCount: 0
+  maxFrameTime: 1
+  recyclePaths: 0
+  minAreaSize: 10
+  limitGraphUpdates: 1
+  maxGraphUpdateFreq: .200000003
+  lastScanTime: .158141598
+  inGameDebugPath: 
+  isScanning: 0
+  showGraphs: 1
+  lastUniqueAreaIndex: 16
 --- !u!154 &15400000
 TerrainCollider:
   m_ObjectHideFlags: 1
