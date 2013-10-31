@@ -22,5 +22,7 @@ public class AnimatorSetup{
 		anim.SetFloat(hash.speedFloat, speed, speedDampTime, Time.deltaTime);
 		anim.SetFloat(hash.angularSpeedFloat, angularSeed, angularSpeedDampTime, Time.deltaTime);
 		anim.SetBool(hash.climbBool, climb);
+		
+		
 	}
 }

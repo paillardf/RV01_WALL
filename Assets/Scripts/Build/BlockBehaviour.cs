@@ -40,14 +40,14 @@ public class BlockBehaviour : MonoBehaviour {
 		Bounds b =	gameObject.collider.bounds;
 		GraphUpdateObject guo = new GraphUpdateObject(b);
 		AstarPath.active.UpdateGraphs (guo);
-		print ("add");
+		
 	}
 	
 	void removeFromPathFinder(){
 		Bounds b = gameObject.collider.bounds;
 		GraphUpdateObject guo = new GraphUpdateObject(b);
 		AstarPath.active.UpdateGraphs (guo,0.0f);
-		print ("remove");
+		
 	}
 	
 	
@@ -164,7 +164,7 @@ public class BlockBehaviour : MonoBehaviour {
 				Collision c = colliders[i];
 				if(!c.Equals(null)){
 					if(!(c.collider==null)){
-						print("ok");
+						
 						c.collider.SendMessage("checkGravityTotal");
 					}
 				}

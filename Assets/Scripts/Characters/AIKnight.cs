@@ -8,6 +8,8 @@ using Pathfinding;
 
 public class AIKnight : AIPathFinder
 {
+	
+	public float climbingValue = 0.5f;
     
 	 private Animator anim;                  // Reference to the Animator.
     private HashIDs hash;                   // Reference to the HashIDs script.
@@ -31,13 +33,34 @@ public class AIKnight : AIPathFinder
 		if (navController != null) {
 			navController.SimpleMove (GetFeetPosition(),anim.deltaPosition/ Time.deltaTime);
 		} else if (controller != null) {
-			controller.SimpleMove (anim.deltaPosition/ Time.deltaTime);
+			AnimatorStateInfo currentBaseState = anim.GetCurrentAnimatorStateInfo(0);
+			if(currentBaseState.nameHash==	hash.climbState	){
+				controller.Move (anim.deltaPosition/ Time.deltaTime/30);
+			}else{
+				controller.SimpleMove (anim.deltaPosition/ Time.deltaTime);
+			}
 		} else if (rigid != null) {
 			rigid.AddForce (anim.deltaPosition/ Time.deltaTime);
 		} else {
 			transform.Translate (anim.deltaPosition, Space.World);
 		}
-        
+       /* controller.
+		AnimatorStateInfo currentBaseState = anim.GetCurrentAnimatorStateInfo(0);
+		if(currentBaseState.nameHash==	hash.climbState	){
+			if(currentBaseState.normalizedTime>0.95){
+				anim.
+				currentBaseState.normalizedTime=1;
+				tr.Translate(new Vector3(0,1,0));
+				isClimbing = false;
+			}else{
+				isClimbing = true;
+			}
+			//tr.Translate(new Vector3(0,climbingCurve.Evaluate(currentBaseState.normalizedTime),0));
+		}else if(isClimbing){
+			isClimbing = false;
+			//tr.Translate(new Vector3(0,1,0));
+		}*/
+		
         // The gameobject's rotation is driven by the animation's rotation.
        transform.rotation = anim.rootRotation;
     }
@@ -53,11 +76,25 @@ public class AIKnight : AIPathFinder
 		}else if (canMove) {  
 			Vector3 desiredVelocity = CalculateVelocity (GetFeetPosition());
 			if(desiredVelocity!=Vector3.zero){
-				
+				if(desiredVelocity.y>climbingValue){
+					RaycastHit hit = new RaycastHit();
+					int mask  = Constants.MaskCollision;
+					Ray ray = new Ray(tr.position+tr.up*controller.height*3/4, tr.forward);
+					Debug.DrawRay(tr.position+tr.up*controller.height*3/4, tr.forward, Color.blue);
+					if (!Physics.Raycast (ray, out hit ,1, mask)){
+						ray = new Ray(tr.position+tr.up*controller.height/4, tr.forward);
+						Debug.DrawRay(tr.position+tr.up*controller.height/4, tr.forward, Color.blue);
+						if (Physics.Raycast (ray,out hit ,0.4F, mask)){
+							climb=true;
+						}
+					}
+						
+					
+				}
 				desiredVelocity.y = 0;
 				Debug.DrawRay(tr.position+transform.up, desiredVelocity, Color.red);
 				angle = FindAngle(transform.forward, targetDirection, transform.up);
-				print (angle);
+				
 				if(angle>Mathf.PI/2||angle<-Mathf.PI/2){
 					speed = 0;
 				}else{
@@ -73,7 +110,6 @@ public class AIKnight : AIPathFinder
 		}
 		
 		
-			
 		
         // Call the Setup function of the helper class with the given parameters.
         animSetup.Setup(speed, angle,climb);

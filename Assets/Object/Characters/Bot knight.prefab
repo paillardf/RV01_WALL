@@ -1900,14 +1900,15 @@ MonoBehaviour:
   target: {fileID: 0}
   canSearch: 1
   canMove: 1
-  speed: 4
+  speed: 5
   deadZone: 5
   turningSpeed: 5
   slowdownDistance: .600000024
   pickNextWaypointDist: 1
   forwardLook: 1
-  endReachedDistance: .200000003
+  endReachedDistance: .400000006
   closestOnPathCheck: 1
+  climbingValue: .600000024
 --- !u!137 &13700000
 SkinnedMeshRenderer:
   m_ObjectHideFlags: 1
@@ -1993,7 +1994,7 @@ CharacterController:
   m_GameObject: {fileID: 100104}
   serializedVersion: 2
   m_Height: 2
-  m_Radius: .5
+  m_Radius: .300000012
   m_SlopeLimit: 45
   m_StepOffset: .300000012
   m_SkinWidth: .0799999982

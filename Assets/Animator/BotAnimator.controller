@@ -227,13 +227,13 @@ Transition:
   m_Name: 
   m_SrcState: {fileID: 110272133}
   m_DstState: {fileID: 110200000}
-  m_TransitionDuration: .107142858
+  m_TransitionDuration: .0923817158
   m_TransitionOffset: 0
   m_Conditions:
   - m_ConditionMode: 5
     m_ConditionEvent: Climb
     m_EventTreshold: 0
-    m_ExitTime: .892857134
+    m_ExitTime: .930917919
   m_Atomic: 1
   m_Solo: 0
   m_Mute: 0
@@ -258,7 +258,7 @@ State:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_Name: Climb
-  m_Speed: 1
+  m_Speed: 2
   m_CycleOffset: 0
   m_Motions:
   - {fileID: 7400002, guid: 7e08a1edd324958409ceab4118c6259b, type: 3}
