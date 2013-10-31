@@ -1,6 +1,7 @@
 ﻿using UnityEngine;
 using System.Collections;
 using System.Collections.Generic;
+using Pathfinding;
 
 public class BlockBehaviour : MonoBehaviour {
 	private int nbCheckGravity  = 0;
@@ -16,7 +17,7 @@ public class BlockBehaviour : MonoBehaviour {
 //	AnimationCurve position_curve = AnimationCurve.Linear(0, 0.0001f, 40, 1);
 	
 	 
-    float delta;
+    float delta  =0;
 	Queue<Vector3> lastPositions = new Queue<Vector3>();
 	bool rotationCheck = false;
     public Material material;
@@ -24,15 +25,31 @@ public class BlockBehaviour : MonoBehaviour {
 	
 	IList<Collision> colliders = new List<Collision>();
 	
+	void Awake (){
+		addToPathFinder();
+	}
 	
 	// Use this for initialization
 	void Start () {
 		objScript = gameObject.GetComponent<AbstractObject>();
-		 matFragmentum = GetComponent<Fragmentum>().GetMaterial();
-		
-        delta = 0;
+		matFragmentum = GetComponent<Fragmentum>().GetMaterial();
 		
 	}
+	
+	void addToPathFinder(){
+		Bounds b =	gameObject.collider.bounds;
+		GraphUpdateObject guo = new GraphUpdateObject(b);
+		AstarPath.active.UpdateGraphs (guo);
+		print ("add");
+	}
+	
+	void removeFromPathFinder(){
+		Bounds b = gameObject.collider.bounds;
+		GraphUpdateObject guo = new GraphUpdateObject(b);
+		AstarPath.active.UpdateGraphs (guo,0.0f);
+		print ("remove");
+	}
+	
 	
 	void Update () {
 		if(delta>=0){
@@ -68,6 +85,7 @@ public class BlockBehaviour : MonoBehaviour {
 						//transform.rigidbody.mass = weight;
 						transform.rigidbody.isKinematic=false;
 						transform.rigidbody.WakeUp();
+						addToPathFinder();
 						notifyNeighbourg();
 					}
 				if(nbCheckGravity==0){
@@ -92,7 +110,7 @@ public class BlockBehaviour : MonoBehaviour {
 					
 					nbCheckGravity=0;
 					transform.rigidbody.isKinematic=true;
-				
+					removeFromPathFinder();
 					//Destroy (transform.rigidbody);
 				}
 				
@@ -107,7 +125,10 @@ public class BlockBehaviour : MonoBehaviour {
 	void destroy(){
 		notifyNeighbourg();
 		moveNotify();
-	   	Destroy(gameObject);
+		removeFromPathFinder();
+		Destroy (gameObject.collider);
+		Destroy (gameObject);
+		
 	}
 
 	void checkGravity(){
@@ -182,7 +203,9 @@ public class BlockBehaviour : MonoBehaviour {
 		if(transform.rigidbody.isKinematic&&collision.relativeVelocity.sqrMagnitude>20){
 			transform.rigidbody.isKinematic=false;
 			transform.rigidbody.WakeUp();
+			removeFromPathFinder();
 			transform.rigidbody.velocity=collision.relativeVelocity/2;
+			
 		}		 
 	}
 	

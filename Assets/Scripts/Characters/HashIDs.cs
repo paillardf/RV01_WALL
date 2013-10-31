@@ -9,6 +9,7 @@ public class HashIDs : MonoBehaviour {
     public int shoutState;
     public int deadBool;
     public int speedFloat;
+	public int climbBool;
     public int sneakingBool;
     public int shoutingBool;
     public int playerInSightBool;
@@ -25,6 +26,7 @@ public class HashIDs : MonoBehaviour {
         shoutState = Animator.StringToHash("Shouting.Shout");
         deadBool = Animator.StringToHash("Dead");
         speedFloat = Animator.StringToHash("Speed");
+		climbBool = Animator.StringToHash("Climb");
         sneakingBool = Animator.StringToHash("Sneaking");
         shoutingBool = Animator.StringToHash("Shouting");
         playerInSightBool = Animator.StringToHash("PlayerInSight");
