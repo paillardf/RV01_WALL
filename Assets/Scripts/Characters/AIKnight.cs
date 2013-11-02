@@ -35,7 +35,7 @@ public class AIKnight : AIPathFinder
 		} else if (controller != null) {
 			AnimatorStateInfo currentBaseState = anim.GetCurrentAnimatorStateInfo(0);
 			if(currentBaseState.nameHash==	hash.climbState	){
-				controller.Move (anim.deltaPosition/ Time.deltaTime/30);
+				controller.Move (anim.deltaPosition/Time.fixedDeltaTime/28);
 			}else{
 				controller.SimpleMove (anim.deltaPosition/ Time.deltaTime);
 			}
@@ -63,7 +63,12 @@ public class AIKnight : AIPathFinder
 		
         // The gameobject's rotation is driven by the animation's rotation.
        transform.rotation = anim.rootRotation;
+		
     }
+	
+	void FixedUpdate(){
+		
+	}
 	
     public override void Update ()
     {
@@ -81,7 +86,7 @@ public class AIKnight : AIPathFinder
 					int mask  = Constants.MaskCollision;
 					Ray ray = new Ray(tr.position+tr.up*controller.height*3/4, tr.forward);
 					Debug.DrawRay(tr.position+tr.up*controller.height*3/4, tr.forward, Color.blue);
-					if (!Physics.Raycast (ray, out hit ,1, mask)){
+					if (!Physics.Raycast (ray, out hit ,0.4F, mask)){
 						ray = new Ray(tr.position+tr.up*controller.height/4, tr.forward);
 						Debug.DrawRay(tr.position+tr.up*controller.height/4, tr.forward, Color.blue);
 						if (Physics.Raycast (ray,out hit ,0.4F, mask)){

@@ -76,8 +76,10 @@ public class AIPathFinder : MonoBehaviour {
 	public float slowdownDistance = 0.6F;
 	
 	/** Determines within what range it will switch to target the next waypoint in the path */
-	public float pickNextWaypointDist = 0.3F;
+	public float pickNextWaypointDist = 1F;
 	
+	public float pickNextWaypointDistY = 0.2f;
+		
 	/** Target point is Interpolated on the current segment in the path so that it has a distance of #forwardLook from the AI.
 	  * See the detailed description of AIPath for an illustrative image */
 	public float forwardLook = 1;
@@ -370,7 +372,9 @@ public class AIPathFinder : MonoBehaviour {
 				//There is a "next path segment"
 				float dist = XZSqrMagnitude (vPath[currentWaypointIndex], currentPosition);
 					//Mathfx.DistancePointSegmentStrict (vPath[currentWaypointIndex+1],vPath[currentWaypointIndex+2],currentPosition);
-				if (dist < pickNextWaypointDist*pickNextWaypointDist) {
+				
+				float distY = Mathf.Abs(vPath[currentWaypointIndex].y-currentPosition.y);
+				if (distY<pickNextWaypointDistY&&vPath[currentWaypointIndex].y-currentPosition.y < pickNextWaypointDist*pickNextWaypointDist) {
 					currentWaypointIndex++;
 				} else {
 					break;
@@ -381,7 +385,8 @@ public class AIPathFinder : MonoBehaviour {
 		}
 		
 		Vector3 dir;// = vPath[currentWaypointIndex] - vPath[currentWaypointIndex-1];
-		Vector3 targetPosition = vPath[currentWaypointIndex];//CalculateTargetPoint (currentPosition,vPath[currentWaypointIndex-1] , vPath[currentWaypointIndex]);
+		Vector3 targetPosition = vPath[currentWaypointIndex];
+		//Vector3 targetPosition = CalculateTargetPoint (currentPosition,vPath[currentWaypointIndex-1] , vPath[currentWaypointIndex]);
 			//vPath[currentWaypointIndex] + Vector3.ClampMagnitude (dir,forwardLook);
 		
 		
@@ -414,6 +419,24 @@ public class AIPathFinder : MonoBehaviour {
 		Vector3 result = forward*sp;
 		result.y = verticalDir;
 		return result;
+	}
+	
+	protected Vector3 CalculateTargetPoint (Vector3 p, Vector3 a, Vector3 b) {
+		a.y = p.y;
+		b.y = p.y;
+		
+		float magn = (a-b).magnitude;
+		if (magn == 0) return a;
+		
+		float closest = Mathfx.Clamp01 (Mathfx.NearestPointFactor (a, b, p));
+		Vector3 point = (b-a)*closest + a;
+		float distance = (point-p).magnitude;
+		
+		float lookAhead = Mathf.Clamp (forwardLook - distance, 0.0F, forwardLook);
+		
+		float offset = lookAhead / magn;
+		offset = Mathf.Clamp (offset+closest,0.0F,1.0F);
+		return (b-a)*offset + a;
 	}
 	
 	/** Rotates in the specified direction.

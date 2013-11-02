@@ -4,8 +4,8 @@ using System.Collections;
 public class AnimatorSetup{
 	
 	public float speedDampTime = 0.1f;
-	public float angularSpeedDampTime = 0.7f;
-	public float angleResponseTime = 0.6f;
+	public float angularSpeedDampTime = 0.2f;
+	public float angleResponseTime = 0.2f;
 	
 	private Animator anim;
 	private HashIDs hash;

@@ -1900,13 +1900,14 @@ MonoBehaviour:
   target: {fileID: 0}
   canSearch: 1
   canMove: 1
-  speed: 5
+  speed: 4
   deadZone: 5
-  turningSpeed: 5
+  turningSpeed: 45
   slowdownDistance: .600000024
   pickNextWaypointDist: 1
+  pickNextWaypointDistY: .200000003
   forwardLook: 1
-  endReachedDistance: .400000006
+  endReachedDistance: .5
   closestOnPathCheck: 1
   climbingValue: .600000024
 --- !u!137 &13700000
@@ -1993,7 +1994,7 @@ CharacterController:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 100104}
   serializedVersion: 2
-  m_Height: 2
+  m_Height: 1.85000002
   m_Radius: .300000012
   m_SlopeLimit: 45
   m_StepOffset: .300000012

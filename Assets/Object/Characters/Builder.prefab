@@ -12,9 +12,9 @@ GameObject:
   - 92: {fileID: 9200000}
   - 124: {fileID: 12400000}
   - 81: {fileID: 8100000}
-  - 114: {fileID: 11400000}
-  - 114: {fileID: 11400002}
   - 45: {fileID: 4500000}
+  - 114: {fileID: 11400002}
+  - 114: {fileID: 11400000}
   m_Layer: 0
   m_Name: Main Camera
   m_TagString: MainCamera
@@ -245,6 +245,26 @@ MonoBehaviour:
   m_GameObject: {fileID: 100000}
   m_Enabled: 1
   m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1eb361822cb9bf949b0b3833483defdf, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  currentBox: {fileID: 0}
+  stoneBox: {fileID: 400000, guid: 25ee9b029d9a3734ebba764462172482, type: 2}
+  mediumStoneBox: {fileID: 400000, guid: 9a1d7390569b4b6499fd91d4f3549f59, type: 2}
+  woodBox: {fileID: 400000, guid: ad7a46bf921a1084e82cd276fa4ca28f, type: 2}
+  stairsBox: {fileID: 400000, guid: 8bc97f0a6513cae4d83e8ecfe5228d85, type: 2}
+  plankBox: {fileID: 400000, guid: f6cd789e14a8ed245a0dc504a1bdda01, type: 2}
+  torchBox: {fileID: 400000, guid: ed374020339905e43b175a7604b131cf, type: 2}
+  doorBox: {fileID: 400000, guid: 13557dadd268b1749bc5839c22996b83, type: 2}
+  vaultBox: {fileID: 400000, guid: c8208298aca9ea44c895ce5f9dd7499f, type: 2}
+--- !u!114 &11400002
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 100000}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 27acebc9ad1110f6d00074c88d76c639, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
@@ -258,26 +278,6 @@ MonoBehaviour:
   yMinLimit: -20
   yMaxLimit: 80
   ball: {fileID: 400006}
---- !u!114 &11400002
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 100000}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 1eb361822cb9bf949b0b3833483defdf, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  currentBox: {fileID: 0}
-  stoneBox: {fileID: 400000, guid: 25ee9b029d9a3734ebba764462172482, type: 2}
-  mediumStoneBox: {fileID: 400000, guid: 9a1d7390569b4b6499fd91d4f3549f59, type: 2}
-  woodBox: {fileID: 400000, guid: ad7a46bf921a1084e82cd276fa4ca28f, type: 2}
-  stairsBox: {fileID: 400000, guid: 8bc97f0a6513cae4d83e8ecfe5228d85, type: 2}
-  plankBox: {fileID: 400000, guid: f6cd789e14a8ed245a0dc504a1bdda01, type: 2}
-  torchBox: {fileID: 400000, guid: ed374020339905e43b175a7604b131cf, type: 2}
-  doorBox: {fileID: 400000, guid: 13557dadd268b1749bc5839c22996b83, type: 2}
-  vaultBox: {fileID: 400000, guid: c8208298aca9ea44c895ce5f9dd7499f, type: 2}
 --- !u!114 &11400004
 MonoBehaviour:
   m_ObjectHideFlags: 1
