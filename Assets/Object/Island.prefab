@@ -9,13 +9,13 @@ GameObject:
   m_Component:
   - 4: {fileID: 400000}
   - 20: {fileID: 2000000}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: Water4Example (Advanced)ReflectionMain Camera
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!1 &100002
 GameObject:
   m_ObjectHideFlags: 1
@@ -24,7 +24,7 @@ GameObject:
   serializedVersion: 4
   m_Component:
   - 4: {fileID: 400002}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: Specular
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -42,7 +42,7 @@ GameObject:
   - 33: {fileID: 3300000}
   - 23: {fileID: 2300000}
   - 114: {fileID: 11400000}
-  m_Layer: 4
+  m_Layer: 10
   m_Name: Tile
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -59,7 +59,7 @@ GameObject:
   - 4: {fileID: 400006}
   - 114: {fileID: 11400002}
   - 154: {fileID: 15400000}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: Island
   m_TagString: no-placement-collide
   m_Icon: {fileID: 0}
@@ -78,13 +78,13 @@ GameObject:
   - 114: {fileID: 11400010}
   - 114: {fileID: 11400006}
   - 114: {fileID: 11400008}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: Water4Example (Advanced)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!1 &100010
 GameObject:
   m_ObjectHideFlags: 0
@@ -94,13 +94,13 @@ GameObject:
   m_Component:
   - 4: {fileID: 400010}
   - 20: {fileID: 2000002}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: Water4Example (Advanced)ReflectionSceneCamera
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!1 &100012
 GameObject:
   m_ObjectHideFlags: 1
@@ -112,7 +112,7 @@ GameObject:
   - 33: {fileID: 3300002}
   - 23: {fileID: 2300002}
   - 114: {fileID: 11400012}
-  m_Layer: 4
+  m_Layer: 10
   m_Name: Tile
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -130,7 +130,7 @@ GameObject:
   - 33: {fileID: 3300004}
   - 23: {fileID: 2300004}
   - 114: {fileID: 11400014}
-  m_Layer: 4
+  m_Layer: 10
   m_Name: Tile
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -148,7 +148,7 @@ GameObject:
   - 33: {fileID: 3300006}
   - 23: {fileID: 2300006}
   - 114: {fileID: 11400016}
-  m_Layer: 4
+  m_Layer: 10
   m_Name: Tile
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -171,14 +171,30 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
+--- !u!1 &100020
+GameObject:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  serializedVersion: 4
+  m_Component:
+  - 4: {fileID: 400020}
+  - 114: {fileID: 11400018}
+  m_Layer: 0
+  m_Name: A*
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
 --- !u!4 &400000
 Transform:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 100000}
-  m_LocalRotation: {x: -.13136895, y: 0, z: 0, w: .991333544}
-  m_LocalPosition: {x: 1063.5553, y: -4.13746262, z: 940.629639}
+  m_LocalRotation: {x: -.428278357, y: .23157537, z: .114536427, w: .865928352}
+  m_LocalPosition: {x: 1014.48511, y: 11.8195362, z: 992.018677}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 400006}
@@ -211,9 +227,10 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 100006}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -1000, y: -1, z: -1000}
+  m_LocalPosition: {x: -1000, y: -.720000029, z: -1000}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
+  - {fileID: 400020}
   - {fileID: 400018}
   - {fileID: 400008}
   - {fileID: 400000}
@@ -241,8 +258,8 @@ Transform:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 100010}
-  m_LocalRotation: {x: -.13136895, y: 0, z: 0, w: .991333544}
-  m_LocalPosition: {x: 1063.5553, y: 23.8687897, z: 940.629639}
+  m_LocalRotation: {x: -.382683486, y: 0, z: 0, w: .923879504}
+  m_LocalPosition: {x: 1021.71796, y: 7.62265015, z: 990.538696}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 400006}
@@ -287,6 +304,17 @@ Transform:
   m_GameObject: {fileID: 100018}
   m_LocalRotation: {x: .320428222, y: .149418131, z: .25616166, w: .899656177}
   m_LocalPosition: {x: 945.182251, y: 79.604393, z: 928.734192}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 400006}
+--- !u!4 &400020
+Transform:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 100020}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 9790, y: 27.182951, z: 996.749634}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 400006}
@@ -614,6 +642,94 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   reflection: {fileID: 11400006}
   waterBase: {fileID: 11400004}
+--- !u!114 &11400018
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 100020}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 78396926cbbfc4ac3b48fc5fc34a87d1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  astarData:
+    hasBeenReverted: 0
+    data: 504b0304140000080800e99962431b5e314a1a020000110400000b0024006772617068302e6a736f6e0a0020000000000001001800876e317df7d7ce01876e317df7d7ce01876e317df7d7ce0175535d8fda3010fc2b959fd3131f474278bb82a095e8dd095af5a1ba87c5d924168e1dd94e0f38f1dfbb76420eaeaa22396466bd3b3bbbbcb1a211199bbdb13f201b643396ecc619c7d1fd741a4f27431e7f1ea4c3384d204ec7c31cd32466e78855680adcd6a036a00aba35b89b448c9760803b345f5114a563b3e15d1a31b03572b7012734211133daf9dfcad73cd0cd881dc379a29332735494a123474960c7e340a744378a4ba86accb6e2845d54320d51c98478a5336ca956929652d8ae9a3bd6bec16d5da24116b14c4085a118c92a3bcda3ab4b4f796ed175a90c1c17c2502b211bfba25d49392ab0fb2bf74693f87cc9f5fd961a8ea6bebfdce8aaf767407dbb52f0fd068e1c2c4139488bb7e0e25a6653ffcfb78be879899cea3ad3e045c90dd4a857907bd849fc55a27ad42ba31b95b5ac9f2c1ce652543b3fbdc1fdfbf7c341d8a08080add4dec994aaa321c3bf91ba30531b1411e685fcb4f8030adbf7d4c14b61ac23222483c6e9b550fb9511d97be4055d08ebd6a212c12a9aad6f66a71b43916c496ff29f376eae8d428fb5fdd5a840bae3331573d733fc87e9cb7dc097b4c3ba75bb631e5421f1637800fbd830493cb8c6e0021cf8215118999cf5f72c29e694463552d21e849ba4faf720a2e725fc7d9442e921f6a895dfd0ebd70b0d47285208f2b955109aa249a84beb8a1685ac59c391163cfbe44da5036abfa89981d7953855ba374aa85c6fb941544f21479079fe0b504b0304140000080800e9996243a2bd252e7e000000c900000010002400636f6e6e656374696f6e732e6a736f6e0a0020000000000001001800a095317df7d7ce01a095317df7d7ce01a095317df7d7ce01758ebd0ec2300c84dfe5e60c84316b1f00b60e882150232a223b6acd4fa8faee98802a1696937c9ff5e97613b24798f0405839949a4fcbd921afbfc057e02bf006b464424023cc74d45e180e9d6c6e3434322ac229a6911c6429cc294c6d2c0b238e8764121dae76ddfb4ecff5eda36963bafcf23ff2ad5992be37cffb17504b0304140000080800e99962435dd9aa624200000049000000120024006772617068305f656469746f722e6a736f6e0a0020000000000001001800bdbc317df7d7ce01bdbc317df7d7ce01bdbc317df7d7ce01ab56cac94fce4e4d51b22a292a4dd5512acec82f77ad28294a54b24a4bcc29068a94a456949416a58665166726e5a4c2850b32cbf24b94ac949c53f34a528b946a01504b0304140000080800e9996243c498e9948100000094000000090024006d6574612e6a736f6e0a0020000000000001001800bdbc317df7d7ce01bdbc317df7d7ce01bdbc317df7d7ce013d8c3d0f82301400ffcb9b2be98714caeac0628cbb61a8f4014de0959462428cff5d7070bbe1eedef0c2b8f8405081ca649603833eda7958a0923baedeedf480e2a95c8bf25c96bacc45ab4fdc086d0aab8d121d9a4203a3751c1b06699bf16627fc65779b86ce93f3d46757bb61aca377f5f1fffb141c5ec24ae90838e3cde70b504b01022d00140000080800e99962431b5e314a1a020000110400000b00240000000000000000000000000000006772617068302e6a736f6e0a0020000000000001001800876e317df7d7ce01876e317df7d7ce01876e317df7d7ce01504b01022d00140000080800e9996243a2bd252e7e000000c9000000100024000000000000000000000067020000636f6e6e656374696f6e732e6a736f6e0a0020000000000001001800a095317df7d7ce01a095317df7d7ce01a095317df7d7ce01504b01022d00140000080800e99962435dd9aa6242000000490000001200240000000000000000000000370300006772617068305f656469746f722e6a736f6e0a0020000000000001001800bdbc317df7d7ce01bdbc317df7d7ce01bdbc317df7d7ce01504b01022d00140000080800e9996243c498e99481000000940000000900240000000000000000000000cd0300006d6574612e6a736f6e0a0020000000000001001800bdbc317df7d7ce01bdbc317df7d7ce01bdbc317df7d7ce01504b050600000000040004007e010000990400000000
+    data_backup: 
+    data_cachedStartup: 
+    revertData: 
+    cacheStartup: 0
+    compress: 0
+  showNavGraphs: 1
+  showUnwalkableNodes: 1
+  debugMode: 0
+  debugFloor: 0
+  debugRoof: 20000
+  showSearchTree: 0
+  unwalkableNodeDebugSize: .300000012
+  stepByStep: 1
+  logPathResults: 4
+  maxNearestNodeDistance: 50
+  scanOnStartup: 1
+  fullGetNearestSearch: 1
+  prioritizeGraphs: 0
+  prioritizeGraphsLimit: 1
+  colorSettings:
+    _NodeConnection: {r: 1, g: 1, b: 1, a: .899999976}
+    _UnwalkableNode: {r: 1, g: 0, b: 0, a: .5}
+    _BoundsHandles: {r: .289999992, g: .453999996, b: .740999997, a: .899999976}
+    _ConnectionLowLerp: {r: 0, g: 1, b: 0, a: .5}
+    _ConnectionHighLerp: {r: 1, g: 0, b: 0, a: .5}
+    _MeshEdgeColor: {r: 0, g: 0, b: 0, a: .5}
+    _MeshColor: {r: .125, g: .68599999, b: 0, a: .189999998}
+    _AreaColors: []
+  tagNames:
+  - Basic Ground
+  - 1
+  - 2
+  - 3
+  - 4
+  - 5
+  - 6
+  - 7
+  - 8
+  - 9
+  - 10
+  - 11
+  - 12
+  - 13
+  - 14
+  - 15
+  - 16
+  - 17
+  - 18
+  - 19
+  - 20
+  - 21
+  - 22
+  - 23
+  - 24
+  - 25
+  - 26
+  - 27
+  - 28
+  - 29
+  - 30
+  - 31
+  heuristic: 2
+  heuristicScale: 1
+  threadCount: 1
+  maxFrameTime: 1
+  recyclePaths: 0
+  minAreaSize: 5
+  limitGraphUpdates: 1
+  maxGraphUpdateFreq: .200000003
+  lastScanTime: .935898304
+  inGameDebugPath: 
+  isScanning: 0
+  showGraphs: 1
+  lastUniqueAreaIndex: 1
 --- !u!154 &15400000
 TerrainCollider:
   m_ObjectHideFlags: 1
