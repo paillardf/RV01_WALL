@@ -10,6 +10,7 @@ public class AIKnight : AIPathFinder
 {
 	
 	public float climbingValue = 0.5f;
+	
     
 	 private Animator anim;                  // Reference to the Animator.
     private HashIDs hash;                   // Reference to the HashIDs script.

@@ -22,32 +22,43 @@ public class BlockBehaviour : MonoBehaviour {
 	bool rotationCheck = false;
     public Material material;
 	Material matFragmentum;
-	
+	private GraphUpdateObject guo;
 	IList<Collision> colliders = new List<Collision>();
 	
 	void Awake (){
-		addToPathFinder();
+		
+		
 	}
 	
 	// Use this for initialization
 	void Start () {
 		objScript = gameObject.GetComponent<AbstractObject>();
 		matFragmentum = GetComponent<Fragmentum>().GetMaterial();
-		
+		Bounds b = gameObject.collider.bounds;
+		guo = new GraphUpdateObject(b);
+		AstarPath.active.UpdateGraphs (guo);
+		addToPathFinder();
 	}
 	
 	void addToPathFinder(){
-		Bounds b =	gameObject.collider.bounds;
-		GraphUpdateObject guo = new GraphUpdateObject(b);
+		//AstarPath.active.UpdateGraphs(gameObject.collider.bounds);
+		//Bounds b = gameObject.collider.bounds;
+		//guo = new GraphUpdateObject(b);
+		//addToPathFinder();*/
+		//print ("add");
+		AstarPath.active.UpdateGraphs (guo,0.0f);
+		Bounds b = gameObject.collider.bounds;
+		guo = new GraphUpdateObject(b);
 		AstarPath.active.UpdateGraphs (guo);
 		
 	}
 	
 	void removeFromPathFinder(){
-		Bounds b = gameObject.collider.bounds;
-		GraphUpdateObject guo = new GraphUpdateObject(b);
+		//AstarPath.active.UpdateGraphs(gameObject.collider.bounds);
+		//Bounds b = gameObject.collider.bounds;
+		//GraphUpdateObject guo = new GraphUpdateObject(b);
 		AstarPath.active.UpdateGraphs (guo,0.0f);
-		
+	
 	}
 	
 	
@@ -85,7 +96,7 @@ public class BlockBehaviour : MonoBehaviour {
 						//transform.rigidbody.mass = weight;
 						transform.rigidbody.isKinematic=false;
 						transform.rigidbody.WakeUp();
-						addToPathFinder();
+						
 						notifyNeighbourg();
 					}
 				if(nbCheckGravity==0){
@@ -110,7 +121,7 @@ public class BlockBehaviour : MonoBehaviour {
 					
 					nbCheckGravity=0;
 					transform.rigidbody.isKinematic=true;
-					removeFromPathFinder();
+					addToPathFinder();
 					//Destroy (transform.rigidbody);
 				}
 				
@@ -203,7 +214,7 @@ public class BlockBehaviour : MonoBehaviour {
 		if(transform.rigidbody.isKinematic&&collision.relativeVelocity.sqrMagnitude>20){
 			transform.rigidbody.isKinematic=false;
 			transform.rigidbody.WakeUp();
-			removeFromPathFinder();
+			
 			transform.rigidbody.velocity=collision.relativeVelocity/2;
 			
 		}		 

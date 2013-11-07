@@ -77,7 +77,7 @@ public class AIPathFinder : MonoBehaviour {
 	
 	/** Determines within what range it will switch to target the next waypoint in the path */
 	public float pickNextWaypointDist = 1F;
-	
+	public float pickNextWaypointBlockDist = 0.2F;
 	public float pickNextWaypointDistY = 0.2f;
 		
 	/** Target point is Interpolated on the current segment in the path so that it has a distance of #forwardLook from the AI.
@@ -373,8 +373,18 @@ public class AIPathFinder : MonoBehaviour {
 				float dist = XZSqrMagnitude (vPath[currentWaypointIndex], currentPosition);
 					//Mathfx.DistancePointSegmentStrict (vPath[currentWaypointIndex+1],vPath[currentWaypointIndex+2],currentPosition);
 				
+				float nextWD = pickNextWaypointDist;
+				RaycastHit hit = new RaycastHit();
+				int mask  = Constants.MaskGround;
+				Ray ray = new Ray(tr.position, -tr.up);
+				if (!Physics.Raycast (ray, out hit ,0.1F, mask)){
+					nextWD = pickNextWaypointBlockDist;
+				}
+				
 				float distY = Mathf.Abs(vPath[currentWaypointIndex].y-currentPosition.y);
-				if (distY<pickNextWaypointDistY&&vPath[currentWaypointIndex].y-currentPosition.y < pickNextWaypointDist*pickNextWaypointDist) {
+				
+				
+				if (distY<pickNextWaypointDistY&&dist< nextWD*nextWD) {
 					currentWaypointIndex++;
 				} else {
 					break;

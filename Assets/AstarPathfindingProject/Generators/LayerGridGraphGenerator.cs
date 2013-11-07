@@ -1495,7 +1495,7 @@ namespace Pathfinding {
 						
 						Node other = nodes[nIndex];
 						
-						
+						if(other==null)continue;
 						Gizmos.DrawLine ((Vector3)node.position,(Vector3)other.position);
 					}
 				}
@@ -1666,7 +1666,7 @@ namespace Pathfinding {
 				if (conn != LevelGridNode.NoConnection) {
 					
 					Node node = nodes[index+neighbourOffsets[i] + graph.width*graph.depth*conn];
-					
+					if(node == null) continue;
 					if (node.walkable && node.area != area) {
 						stack.Push (node);
 						node.area = area;
