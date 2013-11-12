@@ -8,7 +8,7 @@ var textureStone : Texture;
 var textureMStone : Texture;
 var textureVault : Texture;
 
-private var longTouch : int = 0;
+private var longTouch : double = 0;
 private var selectedMenu : int = 1;
 private var mousePos_2D : Vector2;
 private var hover : String;
@@ -32,8 +32,9 @@ function OnGUI () {
 		
 	if(Input.GetMouseButton(1)){
 	
-		longTouch ++;
-		if(longTouch<50)
+		longTouch += Time.deltaTime;
+		
+		if(longTouch<1)
 			return;
 		
 		GUI.skin = mySkin;

@@ -46,8 +46,8 @@ public class BoxBehaviour : MonoBehaviour {
 
 	void buildBlock(){
 		if(isValide()){
-			
-			GameObject.Instantiate (block, transform.position, transform.rotation);
+			 Network.Instantiate(block, transform.position, transform.rotation, 0);
+			//GameObject.Instantiate (block, transform.position, transform.rotation);
 			
 		}
 	}

@@ -793,6 +793,7 @@ GameObject:
   - 114: {fileID: 11400000}
   - 114: {fileID: 11400002}
   - 143: {fileID: 14300000}
+  - 148: {fileID: 14800000}
   m_Layer: 0
   m_Name: Bot knight
   m_TagString: Enemy
@@ -1905,6 +1906,7 @@ MonoBehaviour:
   turningSpeed: 45
   slowdownDistance: .600000024
   pickNextWaypointDist: 1
+  pickNextWaypointBlockDist: .200000003
   pickNextWaypointDistY: .200000003
   forwardLook: 1
   endReachedDistance: .5
@@ -2001,6 +2003,18 @@ CharacterController:
   m_SkinWidth: .0799999982
   m_MinMoveDistance: 0
   m_Center: {x: 0, y: 1, z: 0}
+--- !u!148 &14800000
+NetworkView:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 100104}
+  m_Enabled: 1
+  m_StateSynchronization: 1
+  m_Observed: {fileID: 400104}
+  m_ViewID:
+    m_ID: 0
+    m_Type: 0
 --- !u!1001 &100100000
 Prefab:
   m_ObjectHideFlags: 1

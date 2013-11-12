@@ -137,8 +137,8 @@ public class BlockBehaviour : MonoBehaviour {
 		notifyNeighbourg();
 		moveNotify();
 		removeFromPathFinder();
-		Destroy (gameObject.collider);
-		Destroy (gameObject);
+		//Network.Destroy(GetComponent(NetworkView).viewID);
+		Network.Destroy(gameObject);
 		
 	}
 
