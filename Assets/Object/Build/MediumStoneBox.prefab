@@ -95,7 +95,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8a56672f01275f548aa77a0e4b125b2d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  block: {fileID: 400000, guid: bf4bea5db30079745a0809505fa0b98c, type: 2}
+  block: MediumStone
 --- !u!114 &11400002
 MonoBehaviour:
   m_ObjectHideFlags: 1

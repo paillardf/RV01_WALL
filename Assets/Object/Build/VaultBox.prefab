@@ -95,7 +95,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8a56672f01275f548aa77a0e4b125b2d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  block: {fileID: 400000, guid: 0d5fd1efc47c2b3489a46e3bce312331, type: 2}
+  block: Vault
 --- !u!114 &11400002
 MonoBehaviour:
   m_ObjectHideFlags: 1

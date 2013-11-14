@@ -30,8 +30,14 @@ function LateUpdate () {
 
 
 	if(Input.GetKeyDown(KeyCode.Space)){
-	  var newBlock : Transform = Instantiate (ball, transform.position, transform.rotation);
-		newBlock.transform.rigidbody.AddForce(transform.forward*1000000 );
+	 	var newBlock : Transform;
+		if (!Network.isClient && !Network.isServer){
+			newBlock = Instantiate (ball, transform.position, transform.rotation);
+		}else{
+			newBlock = Network.Instantiate (ball, transform.position, transform.rotation,0);
+		}
+		
+	 	newBlock.transform.rigidbody.AddForce(transform.forward*1000000 );
 	}
 	
 	

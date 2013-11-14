@@ -96,7 +96,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8a56672f01275f548aa77a0e4b125b2d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  block: {fileID: 400000, guid: b9ae411447ccb924781bc0d6ed8406be, type: 2}
+  block: Stairs
 --- !u!114 &11400002
 MonoBehaviour:
   m_ObjectHideFlags: 1

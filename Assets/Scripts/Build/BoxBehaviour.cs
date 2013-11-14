@@ -5,7 +5,7 @@ public class BoxBehaviour : MonoBehaviour {
 	private bool collide = false;
 	private bool support = false;
 	
-	public Transform block;
+	public string block;
 	private AbstractObject objScript;
 	
 	void Start () {
@@ -46,11 +46,26 @@ public class BoxBehaviour : MonoBehaviour {
 
 	void buildBlock(){
 		if(isValide()){
-			 Network.Instantiate(block, transform.position, transform.rotation, 0);
+			//Network.Instantiate(block, transform.position, transform.rotation, 0);
+			object[] args = new object[3];
+			args[0]=block;
+			args[1]=transform.position;
+			args[2]=transform.rotation;
+			GameObject gameController = GameObject.FindGameObjectWithTag ("GameController");
+			if(Network.isClient){
+				
+				
+				gameController.networkView.RPC("rpcBuildBlock", RPCMode.Server, args);
+			}else{
+				gameController.SendMessage("buildBlock", args);
+			//	Network.Instantiate(block, transform.position, transform.rotation, 0);
+			}
 			//GameObject.Instantiate (block, transform.position, transform.rotation);
 			
 		}
 	}
+	
+	
 
 	bool isValide(){
 		return !collide&&support;

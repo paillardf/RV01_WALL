@@ -11,8 +11,10 @@ GameObject:
   - 114: {fileID: 11400000}
   - 114: {fileID: 11400002}
   - 114: {fileID: 11400004}
+  - 148: {fileID: 14800000}
+  - 114: {fileID: 11400006}
   m_Layer: 0
-  m_Name: GameControler
+  m_Name: GameController
   m_TagString: GameController
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -138,6 +140,25 @@ MonoBehaviour:
   lord: {fileID: 400004, guid: 8bf5d87dbd4ca1d4dae436108707cffa, type: 2}
   spoon: {x: 17.5480499, y: 36.7144318, z: 13.9693804}
   menuCamera: {fileID: 2000000}
+--- !u!114 &11400006
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 100000}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: aea333f012fd0f140bdf11fafc6a06e7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Stone: {fileID: 400000, guid: 9fd80efa38aab7a458973e1e9599b3d2, type: 2}
+  MediumStone: {fileID: 400000, guid: bf4bea5db30079745a0809505fa0b98c, type: 2}
+  Plank: {fileID: 400000, guid: 1bf37573072398d469f315a558ece44c, type: 2}
+  Door: {fileID: 400000, guid: 6809c8fbc7e62e14cbd012877da5c638, type: 2}
+  Stairs: {fileID: 400000, guid: b9ae411447ccb924781bc0d6ed8406be, type: 2}
+  Torch: {fileID: 400004, guid: 5cfeb9a889c10ae469cb3218e318a857, type: 2}
+  Vault: {fileID: 400000, guid: 0d5fd1efc47c2b3489a46e3bce312331, type: 2}
+  Wood: {fileID: 400000, guid: 9869d2d3aa18f7644adfe98ea49521e5, type: 2}
 --- !u!124 &12400000
 Behaviour:
   m_ObjectHideFlags: 1
@@ -145,6 +166,18 @@ Behaviour:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 100002}
   m_Enabled: 1
+--- !u!148 &14800000
+NetworkView:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 100000}
+  m_Enabled: 1
+  m_StateSynchronization: 1
+  m_Observed: {fileID: 400000}
+  m_ViewID:
+    m_ID: 0
+    m_Type: 0
 --- !u!1001 &100100000
 Prefab:
   m_ObjectHideFlags: 1
