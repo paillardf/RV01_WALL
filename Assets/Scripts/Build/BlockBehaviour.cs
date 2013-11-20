@@ -107,7 +107,8 @@ public class BlockBehaviour : MonoBehaviour {
 		//AstarPath.active.UpdateGraphs(gameObject.collider.bounds);
 		//Bounds b = gameObject.collider.bounds;
 		//GraphUpdateObject guo = new GraphUpdateObject(b);
-		AstarPath.active.UpdateGraphs (guo,0.0f);
+		if(AstarPath.active!=null)
+			AstarPath.active.UpdateGraphs (guo,0.0f);
 	
 	}
 	
