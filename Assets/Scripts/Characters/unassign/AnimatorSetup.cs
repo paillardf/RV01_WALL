@@ -15,14 +15,14 @@ public class AnimatorSetup{
 		hash = hashIDs;
 	}
 	
-	public void Setup(float speed, float angle, bool climb){
+	public void Setup(float speed, float angle, bool climb, bool attack){
 	
 		float angularSeed = angle/angleResponseTime;
 		
 		anim.SetFloat(hash.speedFloat, speed, speedDampTime, Time.deltaTime);
 		anim.SetFloat(hash.angularSpeedFloat, angularSeed, angularSpeedDampTime, Time.deltaTime);
 		anim.SetBool(hash.climbBool, climb);
-		
+		anim.SetBool(hash.attackBool, attack);
 		
 	}
 }

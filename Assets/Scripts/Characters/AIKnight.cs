@@ -10,7 +10,7 @@ public class AIKnight : AIPathFinder
 {
 	
 	public float climbingValue = 0.5f;
-	
+	private GameObject hitTarget;
     
 	 private Animator anim;                  // Reference to the Animator.
     private HashIDs hash;                   // Reference to the HashIDs script.
@@ -82,43 +82,61 @@ public class AIKnight : AIPathFinder
 		}else if (canMove) {  
 			Vector3 desiredVelocity = CalculateVelocity (GetFeetPosition());
 			if(desiredVelocity!=Vector3.zero){
-				if(desiredVelocity.y>climbingValue){
-					RaycastHit hit = new RaycastHit();
-					int mask  = Constants.MaskCollision;
-					Ray ray = new Ray(tr.position+tr.up*controller.height*3/4, tr.forward);
-					Debug.DrawRay(tr.position+tr.up*controller.height*3/4, tr.forward, Color.blue);
-					if (!Physics.Raycast (ray, out hit ,0.4F, mask)){
-						ray = new Ray(tr.position+tr.up*controller.height/4, tr.forward);
-						Debug.DrawRay(tr.position+tr.up*controller.height/4, tr.forward, Color.blue);
-						if (Physics.Raycast (ray,out hit ,0.4F, mask)){
-							climb=true;
-						}
-					}
-						
+				
+				if(path == null || path.vectorPath == null || path.vectorPath.Count == 0){
 					
+					Collider[] hitColliders = Physics.OverlapSphere(transform.position+transform.up, 1f, Constants.MaskBlock);
+					if(hitColliders.Length>0) {	
+						hitTarget = hitColliders[0].gameObject;
+					}
+			
+					
+				}else{
+					hitTarget = null;
+					if(desiredVelocity.y>climbingValue){
+
+						RaycastHit hit = new RaycastHit();
+						int mask  = Constants.MaskCollision;
+						Ray ray = new Ray(tr.position+tr.up*controller.height*3/4, tr.forward);
+						Debug.DrawRay(tr.position+tr.up*controller.height*3/4, tr.forward, Color.blue);
+						if (!Physics.Raycast (ray, out hit ,0.4F, mask)){
+							ray = new Ray(tr.position+tr.up*controller.height/4, tr.forward);
+							Debug.DrawRay(tr.position+tr.up*controller.height/4, tr.forward, Color.blue);
+							if (Physics.Raycast (ray,out hit ,0.4F, mask)){
+								climb=true;
+							}
+						}
+							
+						
+					}
 				}
 				desiredVelocity.y = 0;
 				Debug.DrawRay(tr.position+transform.up, desiredVelocity, Color.red);
 				angle = FindAngle(transform.forward, targetDirection, transform.up);
-				
-				if(angle>Mathf.PI/2||angle<-Mathf.PI/2){
+					
+				if(angle>Mathf.PI/2||angle<-Mathf.PI/2||hitTarget!=null){
 					speed = 0;
 				}else{
 					speed = desiredVelocity.magnitude;
 				}
 				if(Mathf.Abs(angle) < deadZone)
-		        {
-		                // ... set the direction to be along the desired direction and set the angle to be zero.
-		            transform.LookAt(transform.position + targetDirection);
-		            angle = 0f;
-		        }
+			    {
+			                // ... set the direction to be along the desired direction and set the angle to be zero.
+			        transform.LookAt(transform.position + targetDirection);
+			        angle = 0f;
+			    }
+
 			}
 		}
 		
 		
 		
         // Call the Setup function of the helper class with the given parameters.
-        animSetup.Setup(speed, angle,climb);
+        animSetup.Setup(speed, angle,climb, hitTarget!=null);
+		
+		if(hitTarget!=null){
+			attack(hitTarget);	
+		}
 		
 		
 		
@@ -126,7 +144,9 @@ public class AIKnight : AIPathFinder
         
     }
     
-   
+   private void attack(GameObject targer){
+		
+	}
     
  
    

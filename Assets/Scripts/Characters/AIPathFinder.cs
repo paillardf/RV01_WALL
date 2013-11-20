@@ -47,6 +47,8 @@ public class AIPathFinder : MonoBehaviour {
 	 */
 	public Transform target;
 	
+	
+	
 	/** Enables or disables searching for paths.
 	 * Setting this to false does not stop any active path requests from being calculated or stop it from continuing to follow the current path.
 	 * \see #canMove
@@ -175,6 +177,54 @@ public class AIPathFinder : MonoBehaviour {
 		OnEnable ();
 	}
 	
+	private Vector3[] updateTargets(){
+		GameObject[] targetTab = GameObject.FindGameObjectsWithTag("Player");
+		ArrayList targets = new ArrayList();
+		for(int i = 0; i < targetTab.Length; i++){
+			if(!targets.Contains(targetTab[i])){
+				targets.Add(targetTab[i]);
+			}
+		}
+		
+		targetTab = GameObject.FindGameObjectsWithTag("Target");
+		for(int i = 0; i < targetTab.Length; i++){
+			if(!targets.Contains(targetTab[i])){
+				targets.Add(targetTab[i]);
+			}
+		}
+		
+	print(targets.Count);
+		Vector3[] endPoints = new Vector3[targets.Count];
+
+        
+		for(int c = 0; c<targets.Count; c++){
+			endPoints[c] = ((GameObject) (targets[c])).transform.position;
+		}
+        
+		return endPoints;
+				
+		/*
+		
+		if(targetIndex<targets.Count){
+			target = ((GameObject) (targets[targetIndex])).transform;
+		}else{
+			if(newTargetSearch){ // no target atteignable
+				Collider[] hitColliders = Physics.OverlapSphere(transform.position, 40, Constants.MaskBlock);
+				if(hitColliders.Length>0) {
+					
+					target = hitColliders[0].transform;
+					
+						
+					
+				}
+			}
+			newTargetSearch = true;	
+			targetIndex=0;
+		}
+		*/
+		
+	}
+	
 	/** Run at start and when reenabled.
 	 * Starts RepeatTrySearchPath.
 	 * 
@@ -230,11 +280,11 @@ public class AIPathFinder : MonoBehaviour {
 	/** Requests a path to the target */
 	public virtual void SearchPath () {
 		
-		if (target == null) { Debug.LogError ("Target is null, aborting all search"); canSearch = false; return; }
+		//if (target == null) { Debug.Log ("Target is null, aborting all search"); canSearch = false; return; }
 		
 		lastRepath = Time.time;
 		//This is where we should search to
-		Vector3 targetPosition = target.position;
+		//Vector3 targetPosition = target.position;
 		
 		canSearchAgain = false;
 		
@@ -243,7 +293,7 @@ public class AIPathFinder : MonoBehaviour {
 		//seeker.StartPath (p);
 		
 		//We should search from the current position
-		seeker.StartPath (GetFeetPosition(), targetPosition);
+		seeker.StartMultiTargetPath(GetFeetPosition(), updateTargets() ,true);//.StartPath (GetFeetPosition(), targetPosition);
 	}
 	
 	public virtual void OnTargetReached () {
@@ -262,41 +312,82 @@ public class AIPathFinder : MonoBehaviour {
 	  * A path is first requested by #SearchPath, it is then calculated, probably in the same or the next frame.
 	  * Finally it is returned to the seeker which forwards it to this function.\n
 	  */
-	public virtual void OnPathComplete (Path _p) {
-		ABPath p = _p as ABPath;
-		if (p == null) throw new System.Exception ("This function only handles ABPaths, do not use special path types");
+	public virtual void OnPathComplete (Path p) {
 		
-		//Release the previous path
-		if (path != null) path.Release (this);
 		
-		//Claim the new path
-		p.Claim (this);
+        
+        if (p.error) {
+            Debug.Log ("Ouch, the path returned an error\nError: "+p.errorLog);
+			canSearchAgain = true;
+			path = null;
+			return;
+        }
+        
+        MultiTargetPath mp = p as MultiTargetPath;
+        if (mp == null) {
+            Debug.LogError ("The Path was no MultiTargetPath");
+          	path = null;
+			canSearchAgain = true; return;
+        }
+        
+        //All paths
+        List<Vector3>[] paths = mp.vectorPaths;
+        bool noPath = true;
+		for (int i=0;i<paths.Length;i++) {
+            //Plotting path i
+            List<Vector3> mpath = paths[i];
+            
+            if (mpath == null) {
+                Debug.Log ("Path number "+i+" could not be found");
+                continue;
+            }
+			
+			//Claim the new path
+			mp.Claim (this);
 		
-		//Replace the old path
-		path = p;
+			//Replace the old path
+			path = mp;
 		
-		//Reset some variables
-		currentWaypointIndex = 0;
-		targetReached = false;
-		canSearchAgain = true;
+			//mpset some variables
+			currentWaypointIndex = 0;
+			targetReached = false;
+			canSearchAgain = true;
 		
-		//The next row can be used to find out if the path could be found or not
+			noPath = false;
+		//next row can be used to find out if the path could be found or not
 		//If it couldn't (error == true), then a message has probably been logged to the console
 		//however it can also be got using p.errorLog
 		//if (p.error)
 		
-		if (closestOnPathCheck) {
-			Vector3 p1 = p.startPoint;
-			Vector3 p2 = GetFeetPosition ();
-			float magn = Vector3.Distance (p1,p2);
-			Vector3 dir = p2-p1;
-			dir /= magn;
-			int steps = (int)(magn/pickNextWaypointDist);
-			for (int i=0;i<steps;i++) {
-				CalculateVelocity (p1);
-				p1 += dir;
+			if (closestOnPathCheck) {
+				Vector3 p1 = mp.startPoint;
+				Vector3 p2 = GetFeetPosition ();
+				float magn = Vector3.Distance (p1,p2);
+				Vector3 dir = p2-p1;
+				dir /= magn;
+				int steps = (int)(magn/pickNextWaypointDist);
+				for (int j=0;j<steps;j++) {
+					CalculateVelocity (p1);
+					p1 += dir;
+				}
 			}
+			break;
+ 
+            
+        }
+		
+		if(noPath){
+			path = null;	
 		}
+		
+		/*p = _p as ABPath;
+		if (p == null) throw new System.Exception ("This function only handles ABPaths, do not use special path types");
+		
+		//Release the previous path
+		if (path != null) path.Release (this);
+		*/
+		
+		
 	}
 	
 	public virtual Vector3 GetFeetPosition () {
@@ -317,6 +408,8 @@ public class AIPathFinder : MonoBehaviour {
 			RotateTowards (targetDirection);
 		}
 	
+		
+		
 		if (navController != null) {
 			navController.SimpleMove (GetFeetPosition(),dir);
 		} else if (controller != null) {
@@ -354,48 +447,77 @@ public class AIPathFinder : MonoBehaviour {
 	 * /see currentWaypointIndex
 	 */
 	protected Vector3 CalculateVelocity (Vector3 currentPosition) {
-		if (path == null || path.vectorPath == null || path.vectorPath.Count == 0) return Vector3.zero; 
-		
-		List<Vector3> vPath = path.vectorPath;
-		//Vector3 currentPosition = GetFeetPosition();
-		
-		if (vPath.Count == 1) {
-			vPath.Insert (0,currentPosition);
-		}
-		
-		if (currentWaypointIndex >= vPath.Count) { currentWaypointIndex = vPath.Count-1; }
-		
-		if (currentWaypointIndex <= 1) currentWaypointIndex = 1;
-		
-		while (true) {
-			if (currentWaypointIndex < vPath.Count-1) {
-				//There is a "next path segment"
-				float dist = XZSqrMagnitude (vPath[currentWaypointIndex], currentPosition);
-					//Mathfx.DistancePointSegmentStrict (vPath[currentWaypointIndex+1],vPath[currentWaypointIndex+2],currentPosition);
-				
-				float nextWD = pickNextWaypointDist;
-				RaycastHit hit = new RaycastHit();
-				int mask  = Constants.MaskGround;
-				Ray ray = new Ray(tr.position, -tr.up);
-				if (!Physics.Raycast (ray, out hit ,0.1F, mask)){
-					nextWD = pickNextWaypointBlockDist;
+		Vector3 targetPosition;
+		Vector3 dir;
+		if (path == null || path.vectorPath == null || path.vectorPath.Count == 0){
+			Collider[] hitColliders = Physics.OverlapSphere(transform.position+transform.up, 1f, Constants.MaskBlock);
+			if(hitColliders.Length>0) {	
+				targetPosition = hitColliders[0].transform.position;	
+					
+			}else{
+				GameObject g = GameObject.FindGameObjectWithTag("Player");
+				if(g!=null){
+					targetPosition = g.transform.position;
+				}else{
+					return Vector3.zero;
 				}
-				
-				float distY = Mathf.Abs(vPath[currentWaypointIndex].y-currentPosition.y);
-				
-				
-				if (distY<pickNextWaypointDistY&&dist< nextWD*nextWD) {
-					currentWaypointIndex++;
+			}
+			
+			
+		} else{
+			
+			List<Vector3> vPath = path.vectorPath;
+			//Vector3 currentPosition = GetFeetPosition();
+			
+			if (vPath.Count == 1) {
+				vPath.Insert (0,currentPosition);
+			}
+			
+			if (currentWaypointIndex >= vPath.Count) { currentWaypointIndex = vPath.Count-1; }
+			
+			if (currentWaypointIndex <= 1) currentWaypointIndex = 1;
+			
+			while (true) {
+				if (currentWaypointIndex < vPath.Count-1) {
+					//There is a "next path segment"
+					float dist = XZSqrMagnitude (vPath[currentWaypointIndex], currentPosition);
+						//Mathfx.DistancePointSegmentStrict (vPath[currentWaypointIndex+1],vPath[currentWaypointIndex+2],currentPosition);
+					
+					float nextWD = pickNextWaypointDist;
+					RaycastHit hit = new RaycastHit();
+					int mask  = Constants.MaskGround;
+					Ray ray = new Ray(tr.position, -tr.up);
+					if (!Physics.Raycast (ray, out hit ,0.1F, mask)){
+						nextWD = pickNextWaypointBlockDist;
+					}
+					
+					float distY = Mathf.Abs(vPath[currentWaypointIndex].y-currentPosition.y);
+					
+					
+					if (distY<pickNextWaypointDistY&&dist< nextWD*nextWD) {
+						currentWaypointIndex++;
+					} else {
+						break;
+					}
 				} else {
 					break;
 				}
-			} else {
-				break;
 			}
+			targetPosition = vPath[currentWaypointIndex];
+			dir = targetPosition-currentPosition;
+			dir.y = 0;
+			
+			if (currentWaypointIndex == vPath.Count-1 && dir.magnitude <= endReachedDistance) {
+			if (!targetReached) { targetReached = true; OnTargetReached (); }
+			
+			//Send a move request, this ensures gravity is applied
+			return Vector3.zero;
 		}
 		
-		Vector3 dir;// = vPath[currentWaypointIndex] - vPath[currentWaypointIndex-1];
-		Vector3 targetPosition = vPath[currentWaypointIndex];
+			
+		}
+		// = vPath[currentWaypointIndex] - vPath[currentWaypointIndex-1];
+		
 		//Vector3 targetPosition = CalculateTargetPoint (currentPosition,vPath[currentWaypointIndex-1] , vPath[currentWaypointIndex]);
 			//vPath[currentWaypointIndex] + Vector3.ClampMagnitude (dir,forwardLook);
 		
@@ -411,12 +533,6 @@ public class AIPathFinder : MonoBehaviour {
 		this.targetDirection = dir;
 		this.targetPoint = targetPosition;
 		
-		if (currentWaypointIndex == vPath.Count-1 && targetDist <= endReachedDistance) {
-			if (!targetReached) { targetReached = true; OnTargetReached (); }
-			
-			//Send a move request, this ensures gravity is applied
-			return Vector3.zero;
-		}
 		
 		Vector3 forward = tr.forward;
 		float dot = Vector3.Dot (dir.normalized,forward);

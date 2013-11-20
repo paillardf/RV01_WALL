@@ -10,6 +10,7 @@ public class HashIDs : MonoBehaviour {
 
     public int speedFloat;
 	public int climbBool;
+	public int attackBool;
     public int angularSpeedFloat;
 
     
@@ -24,6 +25,7 @@ public class HashIDs : MonoBehaviour {
         speedFloat = Animator.StringToHash("Speed");
 		climbBool = Animator.StringToHash("Climb");
         angularSpeedFloat = Animator.StringToHash("AngularSpeed");
+		attackBool  = Animator.StringToHash("Attack"); 
       
     }
 }
