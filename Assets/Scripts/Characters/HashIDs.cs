@@ -6,6 +6,7 @@ public class HashIDs : MonoBehaviour {
 	// Here we store the hash tags for various strings used in our animators.
     public int climbState;
     public int locomotionState;
+	public int attackState;
     //public int shoutState;
 
     public int speedFloat;
@@ -19,6 +20,7 @@ public class HashIDs : MonoBehaviour {
     {
         climbState = Animator.StringToHash("Base Layer.Climb");
         locomotionState = Animator.StringToHash("Base Layer.Locomotion");
+		attackState = Animator.StringToHash("Body.Attack");
         //shoutState = Animator.StringToHash("Shouting.Shout");
 		
 		

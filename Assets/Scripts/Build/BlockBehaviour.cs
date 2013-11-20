@@ -6,7 +6,7 @@ using Pathfinding;
 public class BlockBehaviour : MonoBehaviour {
 	private int nbCheckGravity  = 0;
 	private int moving = 0;
-	
+	public int life = 15;
 	
 	private AbstractObject objScript;
 	
@@ -288,6 +288,13 @@ public class BlockBehaviour : MonoBehaviour {
 	void OnCollisionExit(Collision collision) {
 		colliders.Remove(collision);
 
+	}
+
+	public void hitReveived(int value){
+		life -= value;
+		if(life<0){
+			destroy();
+		}
 	}
 	
 	

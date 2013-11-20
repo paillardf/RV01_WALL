@@ -11,8 +11,8 @@ public class AIKnight : AIPathFinder
 	
 	public float climbingValue = 0.5f;
 	private GameObject hitTarget;
-    
-	 private Animator anim;                  // Reference to the Animator.
+	private bool waitHitTarget = false;
+		private Animator anim;                  // Reference to the Animator.
     private HashIDs hash;                   // Reference to the HashIDs script.
     private AnimatorSetup animSetup;        // An instance of the AnimatorSetup helper class.
 	
@@ -40,6 +40,17 @@ public class AIKnight : AIPathFinder
 			}else{
 				controller.SimpleMove (anim.deltaPosition/ Time.deltaTime);
 			}
+
+			currentBaseState = anim.GetCurrentAnimatorStateInfo(1);
+			if(currentBaseState.nameHash ==	hash.attackState){
+				waitHitTarget = true;
+				
+			}else if(waitHitTarget){
+				waitHitTarget = false;
+				attack();
+			}
+
+
 		} else if (rigid != null) {
 			rigid.AddForce (anim.deltaPosition/ Time.deltaTime);
 		} else {
@@ -133,18 +144,17 @@ public class AIKnight : AIPathFinder
 		
         // Call the Setup function of the helper class with the given parameters.
         animSetup.Setup(speed, angle,climb, hitTarget!=null);
-		
-		if(hitTarget!=null){
-			attack(hitTarget);	
-		}
-		
+
 		
 		
 		
         
     }
     
-   private void attack(GameObject targer){
+   private void attack(){
+		
+		if(hitTarget!=null)
+			hitTarget.SendMessage("hitReveived" , 5);
 		
 	}
     
