@@ -8,9 +8,24 @@ public class GameController : MonoBehaviour {
 	public Transform lord;
 	public Vector3 spoon;
 	public Camera menuCamera;
-	
+
+	public int nbKnight = 0;
+	public int nbIA = 0;
 	
 	private bool hasplayer=true;
+
+	[RPC]
+	public void addKnight ()
+	{
+		nbKnight++;
+	}
+
+	[RPC]
+	public void addIA ()
+	{
+		nbIA++;
+	}
+
 	
 	void OnGUI(){
 		
@@ -24,7 +39,13 @@ public class GameController : MonoBehaviour {
 	        if (GUI.Button(new Rect(100, 250, 250, 100), "Warrior")){
 				Network.Instantiate(warrior, spoon, Quaternion.identity, 0);
 				hasplayer=true;
-				menuCamera.enabled=false;				
+				menuCamera.enabled=false;	
+				if (!Network.isClient && !Network.isServer){
+					addIA();
+				}else{
+					networkView.RPC("addKnight", RPCMode.Server);
+				}
+
 			}
 	            
 		}

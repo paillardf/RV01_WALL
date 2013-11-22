@@ -28,9 +28,84 @@ public class AIKnight : AIPathFinder
 		
 		
    }
+
+	void OnSerializeNetworkView(BitStream stream, NetworkMessageInfo info)
+	{
+		Vector3 syncPosition = Vector3.zero;
+		Quaternion syncRotation = Quaternion.identity;
+		Vector3 syncVelocity = Vector3.zero;
+		Vector3 syncAngularVelocity = Vector3.zero;
+		bool syncAttack = false;
+		bool syncClimp = false;
+		float syncSpeed = 0;
+		float syncAngularSpeed = 0;
+
+		if (stream.isWriting)
+		{
+			syncPosition = rigidbody.position;
+			stream.Serialize(ref syncPosition);
+			
+			
+			syncRotation = rigidbody.rotation;
+			stream.Serialize(ref syncRotation);
+			
+			syncVelocity = rigidbody.velocity;
+			stream.Serialize(ref syncVelocity);
+			
+			syncAngularVelocity = rigidbody.angularVelocity;
+			stream.Serialize(ref syncAngularVelocity);
+			
+			syncSpeed = anim.GetFloat(hash.speedFloat);
+			stream.Serialize(ref syncSpeed);
+
+			syncAngularSpeed = anim.GetFloat(hash.angularSpeedFloat);
+			stream.Serialize(ref syncAngularSpeed);
+
+			syncClimp =  anim.GetBool(hash.climbBool);
+			stream.Serialize(ref syncClimp);
+
+			syncAttack =  anim.GetBool(hash.attackBool);
+			stream.Serialize(ref syncAttack);
+
+
+
+		}
+		else
+		{
+			stream.Serialize(ref syncPosition);
+			stream.Serialize(ref syncRotation); 
+			
+			stream.Serialize(ref syncVelocity);
+			stream.Serialize(ref syncAngularVelocity);
+
+			stream.Serialize(ref syncSpeed);
+			stream.Serialize(ref syncAngularSpeed);
+			stream.Serialize(ref syncClimp);
+			stream.Serialize(ref syncAttack);
+			
+			rigidbody.rotation = syncRotation;
+			rigidbody.position = syncPosition;
+			rigidbody.velocity = syncVelocity;
+			rigidbody.angularVelocity = syncAngularVelocity;
+
+			animSetup.Setup(syncSpeed, syncAngularSpeed,syncClimp, syncAttack);
+
+			/*syncTime = 0f;
+	        syncDelay = Time.time - lastSynchronizationTime;
+	        lastSynchronizationTime = Time.time;
+	 
+	        syncEndPosition = syncPosition + syncVelocity * syncDelay;
+	        syncStartPosition = rigidbody.position;*/
+		}
+	}
     
 	 void OnAnimatorMove ()
     {
+		if (!networkView.isMine&&(Network.isClient || Network.isServer))
+		{
+			return;
+		}
+
 		if (navController != null) {
 			navController.SimpleMove (GetFeetPosition(),anim.deltaPosition/ Time.deltaTime);
 		} else if (controller != null) {

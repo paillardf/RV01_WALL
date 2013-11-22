@@ -13,10 +13,11 @@ GameObject:
   - 114: {fileID: 11400004}
   - 148: {fileID: 14800000}
   - 114: {fileID: 11400006}
+  - 114: {fileID: 11400008}
   m_Layer: 0
   m_Name: GameController
   m_TagString: GameController
-  m_Icon: {fileID: 0}
+  m_Icon: {fileID: 796366903, guid: 0000000000000000d000000000000000, type: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 4294967295
   m_IsActive: 1
@@ -37,7 +38,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &400000
 Transform:
   m_ObjectHideFlags: 1
@@ -89,6 +90,7 @@ Camera:
   m_RenderingPath: -1
   m_TargetTexture: {fileID: 0}
   m_HDR: 0
+  m_OcclusionCulling: 1
 --- !u!92 &9200000
 Behaviour:
   m_ObjectHideFlags: 1
@@ -109,8 +111,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   climbState: 0
   locomotionState: 0
+  attackState: 0
   speedFloat: 0
   climbBool: 0
+  attackBool: 0
   angularSpeedFloat: 0
 --- !u!114 &11400002
 MonoBehaviour:
@@ -118,7 +122,7 @@ MonoBehaviour:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 100000}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: af32c21afbd3ade4b912d544b29b06ca, type: 3}
   m_Name: 
@@ -140,6 +144,8 @@ MonoBehaviour:
   lord: {fileID: 400004, guid: 8bf5d87dbd4ca1d4dae436108707cffa, type: 2}
   spoon: {x: 17.5480499, y: 36.7144318, z: 13.9693804}
   menuCamera: {fileID: 2000000}
+  nbKnight: 0
+  nbIA: 0
 --- !u!114 &11400006
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -159,6 +165,19 @@ MonoBehaviour:
   Torch: {fileID: 400004, guid: 5cfeb9a889c10ae469cb3218e318a857, type: 2}
   Vault: {fileID: 400000, guid: 0d5fd1efc47c2b3489a46e3bce312331, type: 2}
   Wood: {fileID: 400000, guid: 9869d2d3aa18f7644adfe98ea49521e5, type: 2}
+--- !u!114 &11400008
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 100000}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7cc66b25d361e7e42933d34a316c2db6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  iaPrefab: {fileID: 100104, guid: 549a46e665ddede419b758d1a11b661d, type: 2}
+  difficultyTime: 0
 --- !u!124 &12400000
 Behaviour:
   m_ObjectHideFlags: 1

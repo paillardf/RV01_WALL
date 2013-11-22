@@ -192,8 +192,7 @@ public class AIPathFinder : MonoBehaviour {
 				targets.Add(targetTab[i]);
 			}
 		}
-		
-	print(targets.Count);
+
 		Vector3[] endPoints = new Vector3[targets.Count];
 
         
