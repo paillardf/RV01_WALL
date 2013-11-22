@@ -245,8 +245,6 @@ private function UpdateFunction () {
 	movement.velocity = (tr.position - lastPosition) / Time.deltaTime;
 	var newHVelocity : Vector3 = new Vector3(movement.velocity.x, 0, movement.velocity.z);
 	
-	Debug.DrawRay(transform.position, movement.velocity, Color.red, 1); 
-	
 	// The CharacterController can be moved in unwanted directions when colliding with things.
 	// We want to prevent this from influencing the recorded velocity.
 	if (oldHVelocity == Vector3.zero) {
