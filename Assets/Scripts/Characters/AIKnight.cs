@@ -8,11 +8,11 @@ using Pathfinding;
 
 public class AIKnight : AIPathFinder
 {
-	
+	public int life = 20;
 	public float climbingValue = 0.5f;
 	private GameObject hitTarget;
 	private bool waitHitTarget = false;
-		private Animator anim;                  // Reference to the Animator.
+	private Animator anim;                  // Reference to the Animator.
     private HashIDs hash;                   // Reference to the HashIDs script.
     private AnimatorSetup animSetup;        // An instance of the AnimatorSetup helper class.
 	
@@ -24,10 +24,7 @@ public class AIKnight : AIPathFinder
         anim = GetComponent<Animator>();
         hash = GameObject.FindGameObjectWithTag("GameController").GetComponent<HashIDs>();
         animSetup = new AnimatorSetup(anim, hash);
-        
-		
-		
-   }
+    }
 
 	void OnSerializeNetworkView(BitStream stream, NetworkMessageInfo info)
 	{
@@ -37,11 +34,15 @@ public class AIKnight : AIPathFinder
 		Vector3 syncAngularVelocity = Vector3.zero;
 		bool syncAttack = false;
 		bool syncClimp = false;
+		int syncLife = life;
 		float syncSpeed = 0;
 		float syncAngularSpeed = 0;
 
 		if (stream.isWriting)
 		{
+
+			stream.Serialize(ref syncLife);
+
 			syncPosition = rigidbody.position;
 			stream.Serialize(ref syncPosition);
 			
@@ -82,13 +83,14 @@ public class AIKnight : AIPathFinder
 			stream.Serialize(ref syncAngularSpeed);
 			stream.Serialize(ref syncClimp);
 			stream.Serialize(ref syncAttack);
-			
+			stream.Serialize(ref syncLife);
+
 			rigidbody.rotation = syncRotation;
 			rigidbody.position = syncPosition;
 			rigidbody.velocity = syncVelocity;
 			rigidbody.angularVelocity = syncAngularVelocity;
 
-			animSetup.Setup(syncSpeed, syncAngularSpeed,syncClimp, syncAttack);
+			animSetup.Setup(syncSpeed, syncAngularSpeed,syncClimp, syncAttack, life <=0);
 
 			/*syncTime = 0f;
 	        syncDelay = Time.time - lastSynchronizationTime;
@@ -99,6 +101,23 @@ public class AIKnight : AIPathFinder
 		}
 	}
     
+	void destroy(){
+		
+		if (!Network.isClient && !Network.isServer){
+			Destroy(gameObject);
+			GameObject.FindGameObjectWithTag("GameController").GetComponent<GameController>().removeIA();
+		}else{
+			if(networkView.isMine){
+				GameObject.FindGameObjectWithTag("GameController").GetComponent<GameController>().removeIA();
+				Network.Destroy(gameObject);
+			}
+		}
+		
+		
+	}
+
+
+
 	 void OnAnimatorMove ()
     {
 		if (!networkView.isMine&&(Network.isClient || Network.isServer))
@@ -110,7 +129,12 @@ public class AIKnight : AIPathFinder
 			navController.SimpleMove (GetFeetPosition(),anim.deltaPosition/ Time.deltaTime);
 		} else if (controller != null) {
 			AnimatorStateInfo currentBaseState = anim.GetCurrentAnimatorStateInfo(0);
-			if(currentBaseState.nameHash==	hash.climbState	){
+			if(currentBaseState.nameHash==	hash.deathState	){
+				if(currentBaseState.normalizedTime>0.95f){
+					destroy ();
+				
+				}
+			}else if(currentBaseState.nameHash==	hash.climbState	){
 				controller.Move (anim.deltaPosition/Time.fixedDeltaTime/28);
 			}else{
 				controller.SimpleMove (anim.deltaPosition/ Time.deltaTime);
@@ -166,19 +190,36 @@ public class AIKnight : AIPathFinder
 		if(isClimbing){
 			
 		}else if (canMove) {  
+			hitTarget =null;
 			Vector3 desiredVelocity = CalculateVelocity (GetFeetPosition());
 			if(desiredVelocity!=Vector3.zero){
 				
 				if(path == null || path.vectorPath == null || path.vectorPath.Count == 0){
-					
+
 					Collider[] hitColliders = Physics.OverlapSphere(transform.position+transform.up, 1f, Constants.MaskBlock);
 					if(hitColliders.Length>0) {	
 						hitTarget = hitColliders[0].gameObject;
 					}
+
 			
 					
 				}else{
-					hitTarget = null;
+
+
+
+					Collider[] hitColliders = Physics.OverlapSphere(transform.position+transform.up, 1f, Constants.MaskTarget);
+					if(hitColliders.Length>0) {	
+						hitTarget = hitColliders[0].gameObject;
+					}
+					hitColliders = Physics.OverlapSphere(transform.position+transform.up, 1f, Constants.MaskBlock);
+					for(int i = 0; i < hitColliders.Length; i++){
+						if(hitColliders[i].tag == "Target"){
+							hitTarget = hitColliders[i].gameObject;
+							break;
+						}
+						
+					}
+
 					if(desiredVelocity.y>climbingValue){
 
 						RaycastHit hit = new RaycastHit();
@@ -188,7 +229,7 @@ public class AIKnight : AIPathFinder
 						if (!Physics.Raycast (ray, out hit ,0.4F, mask)){
 							ray = new Ray(tr.position+tr.up*controller.height/4, tr.forward);
 							Debug.DrawRay(tr.position+tr.up*controller.height/4, tr.forward, Color.blue);
-							if (Physics.Raycast (ray,out hit ,0.4F, mask)){
+							if (Physics.Raycast (ray,out hit ,0.38F, mask)){
 								climb=true;
 							}
 						}
@@ -218,19 +259,34 @@ public class AIKnight : AIPathFinder
 		
 		
         // Call the Setup function of the helper class with the given parameters.
-        animSetup.Setup(speed, angle,climb, hitTarget!=null);
+        animSetup.Setup(speed, angle,climb, hitTarget!=null, life<=0);
 
 		
 		
 		
         
     }
+
+
     
    private void attack(){
 		
-		if(hitTarget!=null)
-			hitTarget.SendMessage("hitReveived" , 5);
+		if(hitTarget!=null){
+			if (!Network.isClient && !Network.isServer){
+				hitTarget.SendMessage("hitReveived" , 5);
+			}else{
+				object[] args = new object[1];
+				args[0]=5;
+				hitTarget.networkView.RPC("hitReveived", RPCMode.Server, args);
+			}
+		}
+			
 		
+	}
+
+	[RPC]
+	public void hitReveived(int value){
+		life -= value;
 	}
     
  

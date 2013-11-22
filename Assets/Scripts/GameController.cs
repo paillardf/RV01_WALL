@@ -20,10 +20,15 @@ public class GameController : MonoBehaviour {
 		nbKnight++;
 	}
 
-	[RPC]
+
 	public void addIA ()
 	{
 		nbIA++;
+	}
+
+	public void removeIA ()
+	{
+		nbIA--;
 	}
 
 	
@@ -41,7 +46,7 @@ public class GameController : MonoBehaviour {
 				hasplayer=true;
 				menuCamera.enabled=false;	
 				if (!Network.isClient && !Network.isServer){
-					addIA();
+					addKnight();
 				}else{
 					networkView.RPC("addKnight", RPCMode.Server);
 				}

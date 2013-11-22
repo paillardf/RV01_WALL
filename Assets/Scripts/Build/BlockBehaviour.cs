@@ -290,6 +290,7 @@ public class BlockBehaviour : MonoBehaviour {
 
 	}
 
+	[RPC]
 	public void hitReveived(int value){
 		life -= value;
 		if(life<0){

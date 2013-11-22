@@ -30,12 +30,7 @@ public class IASpawner : MonoBehaviour {
 		if(gc.nbKnight>0){
 			difficultyTime +=Time.deltaTime;
 			if(gc.nbIA<1+difficultyTime%60000){
-				if (!Network.isClient && !Network.isServer){
-					gc.addIA();
-				}else{
-					networkView.RPC("addIA", RPCMode.Server);
-				}
-
+				gc.addIA();
 			}
 		}
 

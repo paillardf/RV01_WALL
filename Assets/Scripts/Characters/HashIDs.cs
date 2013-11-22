@@ -7,13 +7,14 @@ public class HashIDs : MonoBehaviour {
     public int climbState;
     public int locomotionState;
 	public int attackState;
+	public int deathState;
     //public int shoutState;
 
     public int speedFloat;
 	public int climbBool;
 	public int attackBool;
     public int angularSpeedFloat;
-
+	public int deathBool;
     
     
     void Awake ()
@@ -21,6 +22,7 @@ public class HashIDs : MonoBehaviour {
         climbState = Animator.StringToHash("Base Layer.Climb");
         locomotionState = Animator.StringToHash("Base Layer.Locomotion");
 		attackState = Animator.StringToHash("Body.Attack");
+		deathState = Animator.StringToHash("Base Layer.Death");
         //shoutState = Animator.StringToHash("Shouting.Shout");
 		
 		
@@ -28,6 +30,6 @@ public class HashIDs : MonoBehaviour {
 		climbBool = Animator.StringToHash("Climb");
         angularSpeedFloat = Animator.StringToHash("AngularSpeed");
 		attackBool  = Animator.StringToHash("Attack"); 
-      
+		deathBool =  Animator.StringToHash("Death");
     }
 }

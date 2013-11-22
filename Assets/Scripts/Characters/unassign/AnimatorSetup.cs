@@ -15,7 +15,7 @@ public class AnimatorSetup{
 		hash = hashIDs;
 	}
 	
-	public void Setup(float speed, float angle, bool climb, bool attack){
+	public void Setup(float speed, float angle, bool climb, bool attack, bool death){
 	
 		float angularSeed = angle/angleResponseTime;
 		
@@ -23,6 +23,6 @@ public class AnimatorSetup{
 		anim.SetFloat(hash.angularSpeedFloat, angularSeed, angularSpeedDampTime, Time.deltaTime);
 		anim.SetBool(hash.climbBool, climb);
 		anim.SetBool(hash.attackBool, attack);
-		
+		anim.SetBool(hash.deathBool, death);
 	}
 }

@@ -66,7 +66,7 @@ void Update () {
 	
 	
 	if (Physics.Raycast (ray, out hit ,40.0f, mask)){
-		if(Input.GetKey(KeyCode.RightShift)){
+			if(Input.GetKey(KeyCode.RightShift)||Input.GetKey(KeyCode.LeftShift)){
 			currentBox.transform.position = hit.transform.position;
 			currentBox.rotation = hit.transform.rotation;
 			if(Input.GetMouseButtonDown(0)){
@@ -75,7 +75,7 @@ void Update () {
 			}
 			
 			
-		}else if(Input.GetKeyUp(KeyCode.RightShift)){
+			}else if(Input.GetKeyUp(KeyCode.RightShift)||Input.GetKeyUp(KeyCode.LeftShift)){
 			currentBox.SendMessage("init");
 		}else{
 			currentBox.transform.position = hit.point+hit.normal.normalized;	

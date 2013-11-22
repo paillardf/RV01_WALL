@@ -43,11 +43,11 @@ function LateUpdate () {
 	
     if (target) {
       
-    	if(Input.GetAxis("Mouse ScrollWheel") != 0 &&  Input.GetKey(KeyCode.AltGr)) {
+    	if(Input.GetAxis("Mouse ScrollWheel") != 0 &&  (Input.GetKey(KeyCode.AltGr)||Input.GetKey(KeyCode.LeftAlt))) {
 	    	
 	 		target.transform.Translate(Vector3.down * Input.GetAxis("Mouse ScrollWheel") * verticalSpeed);
 	    }else if(Input.GetAxis("Mouse ScrollWheel") != 0) {
-	    	distance+=zoomSpeed*Input.GetAxis("Mouse ScrollWheel")* 0.02;
+	    	distance-=zoomSpeed*Input.GetAxis("Mouse ScrollWheel")* 0.02;
 	    }
 	    if (Input.GetMouseButton(2)) {
 	  
@@ -58,25 +58,25 @@ function LateUpdate () {
 	 		 
 	        
 	   }
-	   if (Input.GetKey (KeyCode.UpArrow)){
+	   if (Input.GetKey (KeyCode.UpArrow)||Input.GetKey (KeyCode.Z)){
 	    dir = Camera.main.transform.forward;
 	    dir.y = 0;
 	    dir.Normalize();
 	 	target.transform.Translate(dir * Time.deltaTime * moveSpeed, target);
 	   }
-	   if (Input.GetKey (KeyCode.DownArrow)){
+	   if (Input.GetKey (KeyCode.DownArrow)||Input.GetKey (KeyCode.S)){
 	    dir = -Camera.main.transform.forward;
 	    dir.y = 0;
 	    dir.Normalize();
 	 	target.transform.Translate(dir * Time.deltaTime * moveSpeed, target);
 	   }
-	    if (Input.GetKey (KeyCode.LeftArrow)){
+	    if (Input.GetKey (KeyCode.LeftArrow)||Input.GetKey (KeyCode.Q)){
 	    dir = -Camera.main.transform.right;
 	    dir.y = 0;
 	    dir.Normalize();
 	 	target.transform.Translate(dir * Time.deltaTime * moveSpeed, target);
 	   }
-	    if (Input.GetKey (KeyCode.RightArrow)){
+	    if (Input.GetKey (KeyCode.RightArrow)||Input.GetKey (KeyCode.D)){
 	    dir = Camera.main.transform.right;
 	    dir.y = 0;
 	    dir.Normalize();
