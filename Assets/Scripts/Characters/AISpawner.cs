@@ -1,7 +1,7 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public class IASpawner : MonoBehaviour {
+public class AISpawner : MonoBehaviour {
 
 	private GameController gc;
 

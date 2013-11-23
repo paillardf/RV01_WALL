@@ -1,0 +1,27 @@
+﻿using UnityEngine;
+using System.Collections;
+
+public class Arrow : MonoBehaviour {
+
+
+
+	void OnCollisionEnter(Collision collision) {
+		if (!Network.isClient && !Network.isServer||networkView.isMine){
+			if(collision.transform.gameObject.tag.Equals("Enemy")){
+				if (!Network.isClient && !Network.isServer){
+					collision.transform.gameObject.SendMessage("hitReveived" , 20);
+				}else{
+					object[] args = new object[1];
+					args[0]=20;
+					collision.transform.gameObject.networkView.RPC("hitReveived", RPCMode.Server, args);
+				}
+			}
+			if (!Network.isClient && !Network.isServer){
+				Destroy(gameObject);
+			}else{
+				Network.Destroy(gameObject);
+			}
+		}		 
+	}
+
+}
