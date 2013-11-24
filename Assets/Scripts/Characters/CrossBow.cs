@@ -3,6 +3,7 @@ using System.Collections;
 
 public class CrossBow : MonoBehaviour {
 	public GameObject arrowPrefab;
+
 	public int power = 200;
 	public void fire(){
 		GameObject arrow;
@@ -19,5 +20,6 @@ public class CrossBow : MonoBehaviour {
 		if(Input.GetKeyDown(KeyCode.A)){
 			fire ();
 		}
+
 	}
 }

@@ -15,6 +15,7 @@ public class AISpawner : MonoBehaviour {
 		}else{
 			Network.Instantiate(iaPrefab, positionSpawner, Quaternion.identity,0);
 		}
+		gc.addIA();
 			
 	}
 
@@ -29,8 +30,8 @@ public class AISpawner : MonoBehaviour {
 	void Update () {
 		if(gc.nbKnight>0){
 			difficultyTime +=Time.deltaTime;
-			if(gc.nbIA<1+difficultyTime%60000){
-				gc.addIA();
+			if(gc.nbIA<1+difficultyTime%10000){
+				SpawnIA();
 			}
 		}
 

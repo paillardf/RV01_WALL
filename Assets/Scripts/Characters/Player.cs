@@ -85,4 +85,7 @@ public class Player : MonoBehaviour {
 	        syncStartPosition = rigidbody.position;*/
 		}
 	}
+
+
+
 }
