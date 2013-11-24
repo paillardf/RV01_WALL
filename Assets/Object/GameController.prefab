@@ -38,7 +38,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &400000
 Transform:
   m_ObjectHideFlags: 1
@@ -112,17 +112,20 @@ MonoBehaviour:
   climbState: 0
   locomotionState: 0
   attackState: 0
+  deathState: 0
   speedFloat: 0
+  directionFloat: 0
   climbBool: 0
   attackBool: 0
   angularSpeedFloat: 0
+  deathBool: 0
 --- !u!114 &11400002
 MonoBehaviour:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 100000}
-  m_Enabled: 0
+  m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: af32c21afbd3ade4b912d544b29b06ca, type: 3}
   m_Name: 
@@ -140,7 +143,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 16e92c4fdf8f895478baeb2cc7fd24ce, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  warrior: {fileID: 400128, guid: 44c2bae07f7e9484fbffdcb4293409c3, type: 3}
+  warrior: {fileID: 400106, guid: b3287101667f5e2438bb6b4e851a51f4, type: 2}
   lord: {fileID: 400004, guid: 8bf5d87dbd4ca1d4dae436108707cffa, type: 2}
   spoon: {x: 17.5480499, y: 36.7144318, z: 13.9693804}
   menuCamera: {fileID: 2000000}
