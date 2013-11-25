@@ -16,15 +16,27 @@ public class Player : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
-		transform.Rotate(0, Input.GetAxis("Mouse X") * sensitivityX, 0);
+		if (!Network.isClient && !Network.isServer||networkView.isMine){
+			transform.Rotate(0, Input.GetAxis("Mouse X") * sensitivityX, 0);
+		}else if(syncStartPosition!=Vector3.zero){
+			syncTime += Time.deltaTime;
+			transform.position = Vector3.Lerp(syncStartPosition, syncEndPosition, syncTime / syncDelay);
+			transform.rotation = Quaternion.Lerp(syncStartRotation, syncEndRotation, syncTime / syncDelay);
+		}
 	}
+
+	private float lastSynchronizationTime = 0f;
+	private float syncDelay = 0f;
+	private float syncTime = 0f;
+	private Vector3 syncStartPosition = Vector3.zero;
+	private Vector3 syncEndPosition = Vector3.zero;
+	private Quaternion syncStartRotation = Quaternion.identity;
+	private Quaternion syncEndRotation = Quaternion.identity ;
 
 	void OnSerializeNetworkView(BitStream stream, NetworkMessageInfo info)
 	{
 		Vector3 syncPosition = Vector3.zero;
 		Quaternion syncRotation = Quaternion.identity;
-		Vector3 syncVelocity = Vector3.zero;
-		Vector3 syncAngularVelocity = Vector3.zero;
 		int syncLife = life;
 		float syncSpeed = 0;
 		float syncDirection = 0;
@@ -34,19 +46,14 @@ public class Player : MonoBehaviour {
 			
 			stream.Serialize(ref syncLife);
 			
-			syncPosition = rigidbody.position;
+			syncPosition = transform.position;
 			stream.Serialize(ref syncPosition);
 			
 			
-			syncRotation = rigidbody.rotation;
+			syncRotation = transform.rotation;
 			stream.Serialize(ref syncRotation);
 			
-			syncVelocity = rigidbody.velocity;
-			stream.Serialize(ref syncVelocity);
-			
-			syncAngularVelocity = rigidbody.angularVelocity;
-			stream.Serialize(ref syncAngularVelocity);
-			
+
 			syncSpeed = anim.GetFloat(hash.speedFloat);
 			stream.Serialize(ref syncSpeed);
 			
@@ -58,20 +65,28 @@ public class Player : MonoBehaviour {
 		}
 		else
 		{
+
+			stream.Serialize(ref syncLife);
 			stream.Serialize(ref syncPosition);
 			stream.Serialize(ref syncRotation); 
 			
-			stream.Serialize(ref syncVelocity);
-			stream.Serialize(ref syncAngularVelocity);
-			
 			stream.Serialize(ref syncSpeed);
 			stream.Serialize(ref syncDirection);
-			stream.Serialize(ref syncLife);
+
+
+			life = syncLife;
+			//transform.rotation = syncRotation;
+			//transform.position = syncPosition;
+			syncTime = 0f;
+			syncDelay = Time.time - lastSynchronizationTime;
+			lastSynchronizationTime = Time.time;
 			
-			rigidbody.rotation = syncRotation;
-			rigidbody.position = syncPosition;
-			rigidbody.velocity = syncVelocity;
-			rigidbody.angularVelocity = syncAngularVelocity;
+			syncStartPosition = transform.position;
+			syncEndPosition = syncPosition;
+			
+			syncStartRotation = transform.rotation;
+			syncEndRotation = syncRotation;
+
 
 			anim.SetFloat(hash.directionFloat, syncDirection);
 			anim.SetFloat(hash.speedFloat, syncSpeed);
@@ -84,6 +99,11 @@ public class Player : MonoBehaviour {
 	        syncEndPosition = syncPosition + syncVelocity * syncDelay;
 	        syncStartPosition = rigidbody.position;*/
 		}
+	}
+
+	[RPC]
+	public void hitReceived(int value){
+		life -= value;
 	}
 
 

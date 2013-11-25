@@ -160,6 +160,7 @@ GameObject:
   m_Component:
   - 4: {fileID: 400018}
   - 114: {fileID: 11400000}
+  - 148: {fileID: 14800000}
   m_Layer: 0
   m_Name: CrossBow
   m_TagString: Untagged
@@ -1303,6 +1304,18 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   arrowPrefab: {fileID: 100000, guid: afe828b8806cb9b4cbdec32784bd2cf4, type: 2}
   power: 158
+--- !u!148 &14800000
+NetworkView:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 100018}
+  m_Enabled: 1
+  m_StateSynchronization: 1
+  m_Observed: {fileID: 400018}
+  m_ViewID:
+    m_ID: 0
+    m_Type: 0
 --- !u!1001 &100100000
 Prefab:
   m_ObjectHideFlags: 1

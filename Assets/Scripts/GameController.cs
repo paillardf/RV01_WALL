@@ -47,6 +47,9 @@ public class GameController : MonoBehaviour {
 				menuCamera.enabled=false;	
 				if (!Network.isClient && !Network.isServer){
 					addKnight();
+				}else if(Network.isServer){
+					addKnight();
+
 				}else{
 					networkView.RPC("addKnight", RPCMode.Server);
 				}

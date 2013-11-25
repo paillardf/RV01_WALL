@@ -1,11 +1,9 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public class RightHand : MonoBehaviour {
+public class LeftHand : MonoBehaviour {
 
-
-	public Transform leftHand;
-
+	public float sensitivityY  = 0.02f;
 	// Use this for initialization
 	void Start () {
 	
@@ -14,8 +12,7 @@ public class RightHand : MonoBehaviour {
 	// Update is called once per frame
 	void Update () {
 		if (!Network.isClient && !Network.isServer||networkView.isMine){
-			transform.LookAt(leftHand);
+			transform.Translate(0, Input.GetAxis("Mouse Y") * sensitivityY, 0);
 		}
-
 	}
 }

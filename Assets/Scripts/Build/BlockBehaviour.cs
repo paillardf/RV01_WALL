@@ -276,7 +276,7 @@ public class BlockBehaviour : MonoBehaviour {
 			colliders.Add(collision);
 		}
 		
-		if(transform.rigidbody.isKinematic&&collision.relativeVelocity.sqrMagnitude>20){
+		if(collision.collider.tag!="Arrow"&&transform.rigidbody.isKinematic&&collision.relativeVelocity.sqrMagnitude>20){
 			transform.rigidbody.isKinematic=false;
 			transform.rigidbody.WakeUp();
 			
@@ -291,7 +291,7 @@ public class BlockBehaviour : MonoBehaviour {
 	}
 
 	[RPC]
-	public void hitReveived(int value){
+	public void hitReceived(int value){
 		life -= value;
 		if(life<0){
 			destroy();

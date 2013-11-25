@@ -26,6 +26,16 @@ public class AIKnight : AIPathFinder
         animSetup = new AnimatorSetup(anim, hash);
     }
 
+
+	private float lastSynchronizationTime = 0f;
+	private float syncDelay = 0f;
+	private float syncTime = 0f;
+	private Vector3 syncStartPosition = Vector3.zero;
+	private Vector3 syncEndPosition = Vector3.zero;
+	private Quaternion syncStartRotation = Quaternion.identity;
+	private Quaternion syncEndRotation = Quaternion.identity ;
+
+
 	void OnSerializeNetworkView(BitStream stream, NetworkMessageInfo info)
 	{
 		Vector3 syncPosition = Vector3.zero;
@@ -43,18 +53,12 @@ public class AIKnight : AIPathFinder
 
 			stream.Serialize(ref syncLife);
 
-			syncPosition = rigidbody.position;
+			syncPosition = transform.position;
 			stream.Serialize(ref syncPosition);
 			
 			
-			syncRotation = rigidbody.rotation;
+			syncRotation = transform.rotation;
 			stream.Serialize(ref syncRotation);
-			
-			syncVelocity = rigidbody.velocity;
-			stream.Serialize(ref syncVelocity);
-			
-			syncAngularVelocity = rigidbody.angularVelocity;
-			stream.Serialize(ref syncAngularVelocity);
 			
 			syncSpeed = anim.GetFloat(hash.speedFloat);
 			stream.Serialize(ref syncSpeed);
@@ -73,22 +77,28 @@ public class AIKnight : AIPathFinder
 		}
 		else
 		{
+
+			stream.Serialize(ref syncLife);
 			stream.Serialize(ref syncPosition);
 			stream.Serialize(ref syncRotation); 
-			
-			stream.Serialize(ref syncVelocity);
-			stream.Serialize(ref syncAngularVelocity);
+
 
 			stream.Serialize(ref syncSpeed);
 			stream.Serialize(ref syncAngularSpeed);
 			stream.Serialize(ref syncClimp);
 			stream.Serialize(ref syncAttack);
-			stream.Serialize(ref syncLife);
 
-			rigidbody.rotation = syncRotation;
-			rigidbody.position = syncPosition;
-			rigidbody.velocity = syncVelocity;
-			rigidbody.angularVelocity = syncAngularVelocity;
+			life = syncLife;
+			syncTime = 0f;
+			syncDelay = Time.time - lastSynchronizationTime;
+			lastSynchronizationTime = Time.time;
+			
+			syncStartPosition = transform.position;
+			syncEndPosition = syncPosition;
+			
+			syncStartRotation = transform.rotation;
+			syncEndRotation = syncRotation;
+
 
 			animSetup.Setup(syncSpeed, syncAngularSpeed,syncClimp, syncAttack, life <=0);
 
@@ -183,7 +193,14 @@ public class AIKnight : AIPathFinder
 	
     public override void Update ()
     {
-		
+
+		if(Network.isClient){
+			syncTime += Time.deltaTime;
+			transform.position = Vector3.Lerp(syncStartPosition, syncEndPosition, syncTime / syncDelay);
+			transform.rotation = Quaternion.Lerp(syncStartRotation, syncEndRotation, syncTime / syncDelay);
+			return;
+		}
+
 		float angle = 0;
 		float speed = 0;
 		bool climb=false;
@@ -272,12 +289,12 @@ public class AIKnight : AIPathFinder
    private void attack(){
 		
 		if(hitTarget!=null){
-			if (!Network.isClient && !Network.isServer){
-				hitTarget.SendMessage("hitReveived" , 5);
+			if (!Network.isClient){
+				hitTarget.SendMessage("hitReceived" , 5);
 			}else{
 				object[] args = new object[1];
 				args[0]=5;
-				hitTarget.networkView.RPC("hitReveived", RPCMode.Server, args);
+				hitTarget.networkView.RPC("hitReceived", RPCMode.Server, args);
 			}
 		}
 			
@@ -285,7 +302,7 @@ public class AIKnight : AIPathFinder
 	}
 
 	[RPC]
-	public void hitReveived(int value){
+	public void hitReceived(int value){
 		life -= value;
 	}
     

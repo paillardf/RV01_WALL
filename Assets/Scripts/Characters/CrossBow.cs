@@ -17,8 +17,12 @@ public class CrossBow : MonoBehaviour {
 	}
 
 	void Update(){
-		if(Input.GetKeyDown(KeyCode.A)){
-			fire ();
+		if (!Network.isClient && !Network.isServer||networkView.isMine){
+			if(Input.GetKeyDown(KeyCode.Mouse0)){
+				fire ();
+			}
+
+
 		}
 
 	}

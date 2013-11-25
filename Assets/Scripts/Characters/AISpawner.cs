@@ -30,7 +30,7 @@ public class AISpawner : MonoBehaviour {
 	void Update () {
 		if(gc.nbKnight>0){
 			difficultyTime +=Time.deltaTime;
-			if(gc.nbIA<1+difficultyTime%10000){
+			if(gc.nbIA<1+difficultyTime/100){
 				SpawnIA();
 			}
 		}
