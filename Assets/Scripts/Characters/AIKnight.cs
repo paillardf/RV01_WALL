@@ -224,11 +224,11 @@ public class AIKnight : AIPathFinder
 
 
 
-					Collider[] hitColliders = Physics.OverlapSphere(transform.position+transform.up, 1f, Constants.MaskTarget);
+					Collider[] hitColliders = Physics.OverlapSphere(transform.position+transform.up, 1.3f, Constants.MaskTarget);
 					if(hitColliders.Length>0) {	
 						hitTarget = hitColliders[0].gameObject;
 					}
-					hitColliders = Physics.OverlapSphere(transform.position+transform.up, 1f, Constants.MaskBlock);
+					hitColliders = Physics.OverlapSphere(transform.position+transform.up, 1.3f, Constants.MaskBlock);
 					for(int i = 0; i < hitColliders.Length; i++){
 						if(hitColliders[i].tag == "Target"){
 							hitTarget = hitColliders[i].gameObject;

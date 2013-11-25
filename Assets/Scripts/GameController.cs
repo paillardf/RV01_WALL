@@ -13,7 +13,9 @@ public class GameController : MonoBehaviour {
 	public int nbIA = 0;
 	
 	private bool hasplayer=true;
-
+	private bool menu = false;
+	private bool gameOver = false;
+	public double score = 0;
 	[RPC]
 	public void addKnight ()
 	{
@@ -31,9 +33,38 @@ public class GameController : MonoBehaviour {
 		nbIA--;
 	}
 
+	void Update(){
+		if(Input.GetKeyDown(KeyCode.Escape)){
+			print ("ok");
+			menu = !menu;
+		}
+	}
 	
 	void OnGUI(){
+
+
 		
+		if(menu){
+			if (GUI.Button(new Rect(300,30,200,60), "Restart game"))
+				
+			{
+				
+				Network.Disconnect();
+				hasplayer = false;
+				menu = false;
+				Application.LoadLevel (Application.loadedLevelName);
+				
+				
+				
+			}
+			if(gameOver){
+				GUI.Label(new Rect(300, 200, 200, 60), "Game Over");
+
+				GUI.Label(new Rect(300, 300, 200, 60), "Score :" + score );
+			}
+		}
+
+
 		if(!hasplayer){
 			if (GUI.Button(new Rect(100, 100, 250, 100), "Light Lord")){
 	            Instantiate(lord, spoon, Quaternion.identity);
@@ -45,11 +76,8 @@ public class GameController : MonoBehaviour {
 				Network.Instantiate(warrior, spoon, Quaternion.identity, 0);
 				hasplayer=true;
 				menuCamera.enabled=false;	
-				if (!Network.isClient && !Network.isServer){
+				if (!Network.isClient || Network.isServer){
 					addKnight();
-				}else if(Network.isServer){
-					addKnight();
-
 				}else{
 					networkView.RPC("addKnight", RPCMode.Server);
 				}
@@ -57,7 +85,13 @@ public class GameController : MonoBehaviour {
 			}
 	            
 		}
+
 		
+	}
+	public void GameOver(){
+		gameOver = true;
+		menu = true;
+		score = GetComponent<AISpawner>().difficultyTime;
 	}
 	
 	public void selectPlayer(){

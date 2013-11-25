@@ -179,6 +179,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7cc66b25d361e7e42933d34a316c2db6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  positionSpawner:
+  - {x: 40, y: 40, z: 6}
+  - {x: 20, y: 40, z: 6}
   iaPrefab: {fileID: 100104, guid: 549a46e665ddede419b758d1a11b661d, type: 2}
   difficultyTime: 0
 --- !u!124 &12400000
