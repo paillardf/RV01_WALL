@@ -10,14 +10,15 @@ public class Stone : AbstractObject {
 				currentRotation = Quaternion.Euler(0,90,0);	
 			break;
 			case 1:
-				currentRotation = Quaternion.Euler(0,0,90);	
-			break;
-			case 2:
 				currentRotation = Quaternion.Euler(0,0,0);	
+				//currentRotation = Quaternion.Euler(0,0,90);	
 			break;
+			//case 2:
+			//	currentRotation = Quaternion.Euler(0,0,0);	
+			//break;
 		}
 		rotationState++;
-		rotationState=rotationState%3;
+		rotationState=rotationState%2;
 		transform.rotation = currentRotation;	
 	}
 	

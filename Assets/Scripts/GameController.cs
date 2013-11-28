@@ -89,6 +89,8 @@ public class GameController : MonoBehaviour {
 		
 	}
 	public void GameOver(){
+		if(gameOver)
+			return;
 		gameOver = true;
 		menu = true;
 		score = GetComponent<AISpawner>().difficultyTime;

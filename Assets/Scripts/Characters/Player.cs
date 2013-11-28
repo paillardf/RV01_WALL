@@ -24,6 +24,12 @@ public class Player : MonoBehaviour {
 			transform.rotation = Quaternion.Lerp(syncStartRotation, syncEndRotation, syncTime / syncDelay);
 		}
 	}
+	void OnGUI(){
+
+		GUI.Label(new Rect(20,20,200,100) , "Life :"+life);
+
+	}
+
 
 	private float lastSynchronizationTime = 0f;
 	private float syncDelay = 0f;
