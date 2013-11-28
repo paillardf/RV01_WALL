@@ -19,9 +19,6 @@ public class AICatapult : AIPathFinder
 
 	public GameObject ball;
 	public int fireDistance = 60;
-	private float lastSynchronizationTime = 0f;
-	private float syncDelay = 0f;
-	private float syncTime = 0f;
 	private Vector3 syncStartPosition = Vector3.zero;
 	private Vector3 syncEndPosition = Vector3.zero;
 	private Quaternion syncStartRotation = Quaternion.identity;
@@ -90,9 +87,6 @@ public class AICatapult : AIPathFinder
 
 		
 		if(Network.isClient){
-			syncTime += Time.deltaTime;
-			transform.position = Vector3.Lerp(syncStartPosition, syncEndPosition, syncTime / syncDelay);
-			transform.rotation = Quaternion.Lerp(syncStartRotation, syncEndRotation, syncTime / syncDelay);
 			return;
 		}
 
