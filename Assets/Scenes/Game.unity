@@ -12,14 +12,14 @@ SceneSettings:
     backfaceThreshold: 100
 --- !u!104 &2
 RenderSettings:
-  m_Fog: 0
+  m_Fog: 1
   m_FogColor: {r: .5, g: .5, b: .5, a: 1}
   m_FogMode: 3
-  m_FogDensity: .00999999978
+  m_FogDensity: .00039999999
   m_LinearFogStart: 0
   m_LinearFogEnd: 300
   m_AmbientLight: {r: .200000003, g: .200000003, b: .200000003, a: 1}
-  m_SkyboxMaterial: {fileID: 0}
+  m_SkyboxMaterial: {fileID: 2100000, guid: 53412155bc1016547b1a77b2333c0380, type: 2}
   m_HaloStrength: .5
   m_FlareStrength: 1
   m_FlareFadeSpeed: 3
@@ -156,7 +156,7 @@ Transform:
   m_PrefabParentObject: {fileID: 400018, guid: bb4a7da7ac4c9e04abbc18e4e7caff13, type: 2}
   m_PrefabInternal: {fileID: 672400792}
   m_GameObject: {fileID: 221172316}
-  m_LocalRotation: {x: .320428222, y: .149418131, z: .25616166, w: .899656177}
+  m_LocalRotation: {x: .763723195, y: -.105762251, z: .0167502072, w: .636600852}
   m_LocalPosition: {x: 945.182251, y: 79.604393, z: 928.734192}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
@@ -179,7 +179,7 @@ Light:
   m_Shadows:
     m_Type: 2
     m_Resolution: 2
-    m_Strength: 1
+    m_Strength: .65200001
     m_Bias: .289999992
     m_Softness: 3.69000006
     m_SoftnessFade: .100000001
@@ -378,8 +378,6 @@ Transform:
   - {fileID: 840666304}
   - {fileID: 764943417}
   - {fileID: 1462108930}
-  - {fileID: 1606245989}
-  - {fileID: 675476762}
   m_Father: {fileID: 0}
 --- !u!154 &408197946
 TerrainCollider:
@@ -459,63 +457,6 @@ Prefab:
   m_RootGameObject: {fileID: 408197944}
   m_IsPrefabParent: 0
   m_IsExploded: 1
---- !u!1 &675476761
-GameObject:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 100010, guid: bb4a7da7ac4c9e04abbc18e4e7caff13, type: 2}
-  m_PrefabInternal: {fileID: 672400792}
-  serializedVersion: 4
-  m_Component:
-  - 4: {fileID: 675476762}
-  - 20: {fileID: 675476763}
-  m_Layer: 10
-  m_Name: Water4Example (Advanced)ReflectionSceneCamera
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 0
---- !u!4 &675476762
-Transform:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 400010, guid: bb4a7da7ac4c9e04abbc18e4e7caff13, type: 2}
-  m_PrefabInternal: {fileID: 672400792}
-  m_GameObject: {fileID: 675476761}
-  m_LocalRotation: {x: -.382683486, y: 0, z: 0, w: .923879504}
-  m_LocalPosition: {x: 1021.71796, y: 7.62265015, z: 990.538696}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_Children: []
-  m_Father: {fileID: 408197945}
---- !u!20 &675476763
-Camera:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 2000002, guid: bb4a7da7ac4c9e04abbc18e4e7caff13,
-    type: 2}
-  m_PrefabInternal: {fileID: 672400792}
-  m_GameObject: {fileID: 675476761}
-  m_Enabled: 0
-  serializedVersion: 2
-  m_ClearFlags: 2
-  m_BackGroundColor: {r: 1, g: 1, b: 1, a: 1}
-  m_NormalizedViewPortRect:
-    serializedVersion: 2
-    x: 0
-    y: 0
-    width: 1
-    height: 1
-  near clip plane: .300000012
-  far clip plane: 1000
-  field of view: 60
-  orthographic: 0
-  orthographic size: 100
-  m_Depth: 0
-  m_CullingMask:
-    serializedVersion: 2
-    m_Bits: 4294967279
-  m_RenderingPath: 1
-  m_TargetTexture: {fileID: 0}
-  m_HDR: 0
-  m_OcclusionCulling: 1
 --- !u!1 &764943416
 GameObject:
   m_ObjectHideFlags: 0
@@ -714,6 +655,62 @@ MeshFilter:
   m_PrefabInternal: {fileID: 672400792}
   m_GameObject: {fileID: 864643510}
   m_Mesh: {fileID: 4300000, guid: 681e41ee1260343b395ca58745c94870, type: 3}
+--- !u!1 &1141206708
+GameObject:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  serializedVersion: 4
+  m_Component:
+  - 4: {fileID: 1141206710}
+  - 20: {fileID: 1141206709}
+  m_Layer: 0
+  m_Name: Water4Example (Advanced)ReflectionSceneCamera
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!20 &1141206709
+Camera:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1141206708}
+  m_Enabled: 0
+  serializedVersion: 2
+  m_ClearFlags: 2
+  m_BackGroundColor: {r: 1, g: 1, b: 1, a: 1}
+  m_NormalizedViewPortRect:
+    serializedVersion: 2
+    x: 0
+    y: 0
+    width: 1
+    height: 1
+  near clip plane: .300000012
+  far clip plane: 1000
+  field of view: 60
+  orthographic: 0
+  orthographic size: 5
+  m_Depth: 0
+  m_CullingMask:
+    serializedVersion: 2
+    m_Bits: 4294967279
+  m_RenderingPath: 1
+  m_TargetTexture: {fileID: 0}
+  m_HDR: 0
+  m_OcclusionCulling: 1
+--- !u!4 &1141206710
+Transform:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1141206708}
+  m_LocalRotation: {x: .202747509, y: .737837315, z: .252618194, w: -.592176974}
+  m_LocalPosition: {x: 276, y: -243.971207, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 0}
 --- !u!1 &1335110420
 GameObject:
   m_ObjectHideFlags: 0
@@ -758,7 +755,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!114 &1462108928
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -860,63 +857,6 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 408197945}
---- !u!1 &1606245988
-GameObject:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 100000, guid: bb4a7da7ac4c9e04abbc18e4e7caff13, type: 2}
-  m_PrefabInternal: {fileID: 672400792}
-  serializedVersion: 4
-  m_Component:
-  - 4: {fileID: 1606245989}
-  - 20: {fileID: 1606245990}
-  m_Layer: 10
-  m_Name: Water4Example (Advanced)ReflectionMain Camera
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 0
---- !u!4 &1606245989
-Transform:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 400000, guid: bb4a7da7ac4c9e04abbc18e4e7caff13, type: 2}
-  m_PrefabInternal: {fileID: 672400792}
-  m_GameObject: {fileID: 1606245988}
-  m_LocalRotation: {x: -.428278357, y: .23157537, z: .114536427, w: .865928352}
-  m_LocalPosition: {x: 1014.48511, y: 11.8195362, z: 992.018677}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_Children: []
-  m_Father: {fileID: 408197945}
---- !u!20 &1606245990
-Camera:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 2000000, guid: bb4a7da7ac4c9e04abbc18e4e7caff13,
-    type: 2}
-  m_PrefabInternal: {fileID: 672400792}
-  m_GameObject: {fileID: 1606245988}
-  m_Enabled: 0
-  serializedVersion: 2
-  m_ClearFlags: 2
-  m_BackGroundColor: {r: 1, g: 1, b: 1, a: 1}
-  m_NormalizedViewPortRect:
-    serializedVersion: 2
-    x: 0
-    y: 0
-    width: 1
-    height: 1
-  near clip plane: .300000012
-  far clip plane: 1000
-  field of view: 60
-  orthographic: 0
-  orthographic size: 100
-  m_Depth: 0
-  m_CullingMask:
-    serializedVersion: 2
-    m_Bits: 4294967279
-  m_RenderingPath: 1
-  m_TargetTexture: {fileID: 0}
-  m_HDR: 0
-  m_OcclusionCulling: 1
 --- !u!1 &1625855325
 GameObject:
   m_ObjectHideFlags: 0

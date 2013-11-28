@@ -294,7 +294,7 @@ public class AIKnight : AIPathFinder
 			}else{
 				object[] args = new object[1];
 				args[0]=5;
-				hitTarget.networkView.RPC("hitReceived", RPCMode.Server, args);
+				hitTarget.networkView.RPC("hitReceived", RPCMode.All, args);
 			}
 		}
 			

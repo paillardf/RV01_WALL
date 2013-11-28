@@ -108,6 +108,9 @@ Renderer:
   m_UseLightProbes: 0
   m_LightProbeAnchor: {fileID: 0}
   m_ScaleInLightmap: 1
+  m_SortingLayer: 0
+  m_SortingOrder: 0
+  m_SortingLayerID: 0
 --- !u!33 &3300000
 MeshFilter:
   m_ObjectHideFlags: 1
@@ -153,7 +156,7 @@ Light:
   serializedVersion: 3
   m_Type: 2
   m_Color: {r: .716417909, g: .273077756, b: .0695032179, a: 1}
-  m_Intensity: .5
+  m_Intensity: .920000017
   m_Range: 6.21000004
   m_SpotAngle: 30
   m_CookieSize: 10
@@ -208,6 +211,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: cce358ba778d2be49b960c16844261ae, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  life: 15
   material: {fileID: 2100000, guid: ef483e28fa7a08443ae84da7c8511e7c, type: 2}
 --- !u!148 &14800000
 NetworkView:
@@ -1281,6 +1285,9 @@ ParticleSystemRenderer:
   m_UseLightProbes: 0
   m_LightProbeAnchor: {fileID: 0}
   m_ScaleInLightmap: 1
+  m_SortingLayer: 0
+  m_SortingOrder: 0
+  m_SortingLayerID: 0
   m_RenderMode: 1
   m_MaxParticleSize: .5
   m_CameraVelocityScale: 0

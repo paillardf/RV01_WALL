@@ -25,8 +25,9 @@ public class Player : MonoBehaviour {
 		}
 	}
 	void OnGUI(){
-
-		GUI.Label(new Rect(20,20,200,100) , "Life :"+life);
+		if (!Network.isClient && !Network.isServer||networkView.isMine){
+			GUI.Label(new Rect(20,20,200,100) , "Life :"+life);
+		}
 
 	}
 

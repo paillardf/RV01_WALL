@@ -60,7 +60,7 @@ public class GameController : MonoBehaviour {
 			if(gameOver){
 				GUI.Label(new Rect(300, 200, 200, 60), "Game Over");
 
-				GUI.Label(new Rect(300, 300, 200, 60), "Score :" + score );
+				GUI.Label(new Rect(300, 300, 200, 60), "Score :" + (int)score );
 			}
 		}
 
