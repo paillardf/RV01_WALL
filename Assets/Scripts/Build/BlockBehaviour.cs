@@ -196,7 +196,7 @@ public class BlockBehaviour : MonoBehaviour {
 		if (!Network.isClient && !Network.isServer){
 			Destroy(gameObject);
 		}else{
-			Network.RemoveRPCsInGroup(0);
+			Network.RemoveRPCs(networkView.viewID);
 			Network.Destroy(gameObject);
 
 		}
