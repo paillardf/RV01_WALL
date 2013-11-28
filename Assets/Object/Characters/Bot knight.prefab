@@ -1987,7 +1987,8 @@ MonoBehaviour:
   target: {fileID: 0}
   canSearch: 1
   canMove: 1
-  speed: 4
+  normalSpeed: 3
+  slowSpeed: 2.5
   deadZone: 5
   turningSpeed: 45
   slowdownDistance: .600000024

@@ -62,7 +62,11 @@ public class AIPathFinder : MonoBehaviour {
 	/** Maximum velocity.
 	 * This is the maximum speed in world units per second.
 	 */
-	public float speed = 3;
+	private float speed = 3;
+
+	public float normalSpeed = 3;
+	public float slowSpeed = 1;
+
 	
 	public float deadZone = 5f;             // The number of degrees for which the rotation isn't controlled by Mecanim.
 	
@@ -448,6 +452,7 @@ public class AIPathFinder : MonoBehaviour {
 	protected Vector3 CalculateVelocity (Vector3 currentPosition) {
 		Vector3 targetPosition;
 		Vector3 dir;
+		speed = normalSpeed;
 		if (path == null || path.vectorPath == null || path.vectorPath.Count == 0){
 			Collider[] hitColliders = Physics.OverlapSphere(transform.position+transform.up, 1f, Constants.MaskBlock);
 			if(hitColliders.Length>0) {	
@@ -488,6 +493,7 @@ public class AIPathFinder : MonoBehaviour {
 					Ray ray = new Ray(tr.position, -tr.up);
 					if (!Physics.Raycast (ray, out hit ,0.1F, mask)){
 						nextWD = pickNextWaypointBlockDist;
+						speed = slowSpeed;
 					}
 					
 					float distY = Mathf.Abs(vPath[currentWaypointIndex].y-currentPosition.y);
@@ -535,6 +541,10 @@ public class AIPathFinder : MonoBehaviour {
 		
 		Vector3 forward = tr.forward;
 		float dot = Vector3.Dot (dir.normalized,forward);
+
+
+
+
 		float sp = speed * Mathf.Max (dot,minMoveScale) * slowdown;
 		
 		

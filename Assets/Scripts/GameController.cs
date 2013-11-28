@@ -36,7 +36,6 @@ public class GameController : MonoBehaviour {
 
 	void Update(){
 		if(Input.GetKeyDown(KeyCode.Escape)){
-			print ("ok");
 			menu = !menu;
 		}
 	}

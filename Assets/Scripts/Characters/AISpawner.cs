@@ -34,7 +34,30 @@ public class AISpawner : MonoBehaviour {
 	void Start () {
 		gc = GetComponent<GameController>();
 	}
-	
+
+	void OnSerializeNetworkView(BitStream stream, NetworkMessageInfo info)
+	{
+
+		float syncScore = 0;
+		
+		if (stream.isWriting)
+		{
+			
+			syncScore = (float) difficultyTime;
+			stream.Serialize(ref syncScore);
+			
+			
+			
+		}
+		else
+		{
+			
+			stream.Serialize(ref syncScore);
+			difficultyTime = syncScore;
+		}
+	}
+
+
 	// Update is called once per frame
 	private float sponTime= 1;
 
