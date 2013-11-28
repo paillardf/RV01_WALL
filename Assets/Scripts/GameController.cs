@@ -74,8 +74,9 @@ public class GameController : MonoBehaviour {
 	 
 	        if (GUI.Button(new Rect(100, 250, 250, 100), "Warrior")){
 				Network.Instantiate(warrior, spoon, Quaternion.identity, 0);
-				hasplayer=true;
-				menuCamera.enabled=false;	
+				hasplayer = true;
+				menuCamera.enabled = false;
+				Screen.showCursor = false;
 				if (!Network.isClient || Network.isServer){
 					addKnight();
 				}else{
@@ -93,6 +94,7 @@ public class GameController : MonoBehaviour {
 			return;
 		gameOver = true;
 		menu = true;
+		Screen.showCursor = true;
 		score = GetComponent<AISpawner>().difficultyTime;
 	}
 	
