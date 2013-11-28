@@ -16,6 +16,7 @@ public class GameController : MonoBehaviour {
 	private bool menu = false;
 	private bool gameOver = false;
 	public double score = 0;
+
 	[RPC]
 	public void addKnight ()
 	{
@@ -88,6 +89,8 @@ public class GameController : MonoBehaviour {
 
 		
 	}
+
+	[RPC]
 	public void GameOver(){
 		if(gameOver)
 			return;

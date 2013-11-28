@@ -213,9 +213,27 @@ public class AIKnight : AIPathFinder
 				
 				if(path == null || path.vectorPath == null || path.vectorPath.Count == 0){
 
-					Collider[] hitColliders = Physics.OverlapSphere(transform.position+transform.up, 1f, Constants.MaskBlock);
+
+					Collider[] hitColliders = Physics.OverlapSphere(transform.position+transform.up, 1.3f, Constants.MaskTarget);
 					if(hitColliders.Length>0) {	
 						hitTarget = hitColliders[0].gameObject;
+					}
+					if(hitTarget!=null){
+						hitColliders = Physics.OverlapSphere(transform.position+transform.up, 1.3f, Constants.MaskBlock);
+						for(int i = 0; i < hitColliders.Length; i++){
+							if(hitColliders[i].tag == "Target"){
+								hitTarget = hitColliders[i].gameObject;
+								break;
+							}
+							
+						}
+					}
+
+					if(hitTarget!=null){
+						hitColliders = Physics.OverlapSphere(transform.position+transform.up, 1f, Constants.MaskBlock);
+						if(hitColliders.Length>0) {	
+							hitTarget = hitColliders[0].gameObject;
+						}
 					}
 
 			
@@ -228,13 +246,15 @@ public class AIKnight : AIPathFinder
 					if(hitColliders.Length>0) {	
 						hitTarget = hitColliders[0].gameObject;
 					}
-					hitColliders = Physics.OverlapSphere(transform.position+transform.up, 1.3f, Constants.MaskBlock);
-					for(int i = 0; i < hitColliders.Length; i++){
-						if(hitColliders[i].tag == "Target"){
-							hitTarget = hitColliders[i].gameObject;
-							break;
+					if(hitTarget!=null){
+						hitColliders = Physics.OverlapSphere(transform.position+transform.up, 1.3f, Constants.MaskBlock);
+						for(int i = 0; i < hitColliders.Length; i++){
+							if(hitColliders[i].tag == "Target"){
+								hitTarget = hitColliders[i].gameObject;
+								break;
+							}
+							
 						}
-						
 					}
 
 					if(desiredVelocity.y>climbingValue){
@@ -289,7 +309,7 @@ public class AIKnight : AIPathFinder
    private void attack(){
 		
 		if(hitTarget!=null&&life>0){
-			if (!Network.isClient&&!Network.isClient){
+			if (!Network.isClient&&!Network.isServer){
 				hitTarget.SendMessage("hitReceived" , 5);
 			}else{
 				object[] args = new object[1];
