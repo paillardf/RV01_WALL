@@ -18,6 +18,7 @@ public class AICatapult : AIPathFinder
     }
 
 	public GameObject ball;
+	public int fireDistance = 60;
 	private float lastSynchronizationTime = 0f;
 	private float syncDelay = 0f;
 	private float syncTime = 0f;
@@ -96,18 +97,23 @@ public class AICatapult : AIPathFinder
     public override void Update ()
     {
 
+
 		if(Network.isClient){
 			syncTime += Time.deltaTime;
 			transform.position = Vector3.Lerp(syncStartPosition, syncEndPosition, syncTime / syncDelay);
 			transform.rotation = Quaternion.Lerp(syncStartRotation, syncEndRotation, syncTime / syncDelay);
 			return;
 		}
+
+		if(life<=0){
+			destroy();
+		}
 		if (canMove) {  
 			hitTarget =null;
 			Vector3 desiredVelocity = CalculateVelocity (GetFeetPosition());
 			if(desiredVelocity!=Vector3.zero){
 				GameObject p = GameObject.FindGameObjectWithTag("Player");
-				if(p!=null&&Vector3.Distance(transform.position, p.transform.position)<60){
+				if(p!=null&&Vector3.Distance(transform.position, p.transform.position)<fireDistance){
 					hitTarget = p;
 				}
 				desiredVelocity.y = 0;
@@ -118,12 +124,15 @@ public class AICatapult : AIPathFinder
 				if(hitTarget==null){
 					transform.LookAt(transform.position + targetDirection);
 					//rigidbody.velocity = - desiredVelocity;
-					rigidbody.isKinematic = false;
+					if(rigidbody.isKinematic){
+						rigidbody.isKinematic = false;
+						transform.rigidbody.WakeUp();
+					}
+					desiredVelocity.y = rigidbody.velocity.y;
 					rigidbody.velocity =  desiredVelocity;
 				}else{
 					transform.LookAt(hitTarget.transform.position);
 					rigidbody.isKinematic = true;
-
 					fireTime -= Time.deltaTime;
 					if(fireTime<0){
 						fireTime = 15;
@@ -149,7 +158,6 @@ public class AICatapult : AIPathFinder
 
 		// rac(xp /sin2a *g) = v0
 		if(hitTarget!=null){
-			print (Physics.gravity.magnitude);
 			float vIni = Mathf.Sqrt(Vector3.Distance(transform.position, hitTarget.transform.position) *Physics.gravity.magnitude);
 
 			GameObject newBlock;
@@ -172,6 +180,7 @@ public class AICatapult : AIPathFinder
 	[RPC]
 	public void hitReceived(int value){
 		life -= value;
+
 	}
     
  

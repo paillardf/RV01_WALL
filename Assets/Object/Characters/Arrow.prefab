@@ -28,8 +28,8 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 100000}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 41, y: 36.5946274, z: 7}
-  m_LocalScale: {x: .3932091, y: .3932091, z: .929608583}
+  m_LocalPosition: {x: 19.1702271, y: 36.0009918, z: 18.0996094}
+  m_LocalScale: {x: .5, y: .5, z: .929608583}
   m_Children: []
   m_Father: {fileID: 0}
 --- !u!23 &2300000
@@ -97,7 +97,7 @@ CapsuleCollider:
   m_IsTrigger: 0
   m_Enabled: 1
   m_Radius: .0199999996
-  m_Height: 1.37
+  m_Height: 1.10000002
   m_Direction: 2
   m_Center: {x: 0, y: 0, z: -.180000007}
 --- !u!148 &14800000
@@ -108,7 +108,7 @@ NetworkView:
   m_GameObject: {fileID: 100000}
   m_Enabled: 1
   m_StateSynchronization: 1
-  m_Observed: {fileID: 400000}
+  m_Observed: {fileID: 11400000}
   m_ViewID:
     m_ID: 0
     m_Type: 0

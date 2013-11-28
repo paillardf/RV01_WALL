@@ -6,7 +6,7 @@ Material:
   m_ObjectHideFlags: 0
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
-  m_Name: hero_color
+  m_Name: bot_color
   m_Shader: {fileID: 4800000, guid: cb9fdbd2de4756341a9dd0a324f17b42, type: 3}
   m_ShaderKeywords: []
   m_CustomRenderQueue: -1
@@ -47,8 +47,8 @@ Material:
       data:
         first:
           name: _Color
-        second: {r: 1, g: .818736494, b: .213235319, a: 1}
+        second: {r: .709803939, g: .512102485, b: .370211452, a: 1}
       data:
         first:
           name: _SpecColor
-        second: {r: 1, g: .898275852, b: .566176474, a: 0}
+        second: {r: .97647059, g: .97647059, b: .97647059, a: 0}

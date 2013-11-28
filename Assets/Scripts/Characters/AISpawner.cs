@@ -5,16 +5,24 @@ public class AISpawner : MonoBehaviour {
 
 	private GameController gc;
 
-	public Vector3[] positionSpawner = {new Vector3(40, 40, 6), new Vector3(20, 40, 6)};
+	public Transform[] positionSpawner;
 
-	public GameObject iaPrefab;
+	public GameObject[] iaPrefab;
+
 	public double difficultyTime = 0;
 
 	void SpawnIA(){
+
+		int i = Random.Range(-5, 100);
+		int selectedPrefab = 0;
+		if(i<0){
+			selectedPrefab = 1;
+		}
+
 		if (!Network.isClient && !Network.isServer){
-			Instantiate(iaPrefab, positionSpawner[Random.Range(0,positionSpawner.Length)], Quaternion.identity);
+			Instantiate(iaPrefab[selectedPrefab], positionSpawner[Random.Range(0,positionSpawner.Length)].position, Quaternion.identity);
 		}else{
-			Network.Instantiate(iaPrefab, positionSpawner[Random.Range(0,positionSpawner.Length)], Quaternion.identity,0);
+			Network.Instantiate(iaPrefab[selectedPrefab], positionSpawner[Random.Range(0,positionSpawner.Length)].position, Quaternion.identity,0);
 		}
 		gc.addIA();
 			

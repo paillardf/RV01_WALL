@@ -1663,7 +1663,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 100104}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 42.9536972, y: 40.3412018, z: 6.48228455}
+  m_LocalPosition: {x: 42.9536972, y: 36.5862961, z: 6.48228455}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 400042}
@@ -1991,12 +1991,13 @@ MonoBehaviour:
   deadZone: 5
   turningSpeed: 45
   slowdownDistance: .600000024
-  pickNextWaypointDist: 1
+  pickNextWaypointDist: 1.17999995
   pickNextWaypointBlockDist: .200000003
   pickNextWaypointDistY: .200000003
   forwardLook: 1
   endReachedDistance: .5
   closestOnPathCheck: 1
+  life: 20
   climbingValue: .600000024
 --- !u!137 &13700000
 SkinnedMeshRenderer:

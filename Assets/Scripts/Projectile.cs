@@ -3,6 +3,23 @@ using System.Collections;
 
 public class Projectile : MonoBehaviour {
 
+	private double timeOfLife = 20;
+
+	void FixedUpdate(){
+		timeOfLife-=Time.fixedDeltaTime;
+		if(timeOfLife<0){
+			destroy ();
+		}
+	}
+
+	public void destroy(){
+		if (!Network.isClient && !Network.isServer){
+			Destroy(gameObject);
+		}else{
+			Network.Destroy(gameObject);
+		}
+	}
+
 	void OnSerializeNetworkView(BitStream stream, NetworkMessageInfo info)
 	{
 	    Vector3 syncPosition = Vector3.zero;

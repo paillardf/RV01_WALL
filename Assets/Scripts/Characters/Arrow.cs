@@ -1,7 +1,7 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public class Arrow : MonoBehaviour {
+public class Arrow : Projectile {
 
 
 
@@ -17,12 +17,10 @@ public class Arrow : MonoBehaviour {
 					collision.transform.gameObject.networkView.RPC("hitReceived", RPCMode.Server, args);
 				}
 			}
-			if (!Network.isClient && !Network.isServer){
-				Destroy(gameObject);
-			}else{
-				Network.Destroy(gameObject);
-			}
+			destroy ();
 		}		 
 	}
+
+
 
 }
