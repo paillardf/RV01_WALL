@@ -15,6 +15,7 @@ public class GameController : MonoBehaviour {
 	private bool hasplayer=true;
 	private bool menu = false;
 	private bool gameOver = false;
+	private bool isKnight;
 	public double score = 0;
 
 	[RPC]
@@ -37,6 +38,7 @@ public class GameController : MonoBehaviour {
 	void Update(){
 		if(Input.GetKeyDown(KeyCode.Escape)){
 			menu = !menu;
+			Screen.showCursor = menu || !isKnight;
 		}
 	}
 	
@@ -70,12 +72,14 @@ public class GameController : MonoBehaviour {
 	            Instantiate(lord, spoon, Quaternion.identity);
 				hasplayer = true;
 				menuCamera.enabled=false;
+				isKnight = false;
 			}
 	 
 	        if (GUI.Button(new Rect(100, 250, 250, 100), "Warrior")){
 				Network.Instantiate(warrior, spoon, Quaternion.identity, 0);
 				hasplayer = true;
 				menuCamera.enabled = false;
+				isKnight = true;
 				Screen.showCursor = false;
 				if (!Network.isClient || Network.isServer){
 					addKnight();
@@ -96,7 +100,6 @@ public class GameController : MonoBehaviour {
 			return;
 		gameOver = true;
 		menu = true;
-		Screen.showCursor = true;
 		score = GetComponent<AISpawner>().difficultyTime;
 	}
 	
