@@ -34,45 +34,36 @@ public class AICatapult : AIPathFinder
 		Quaternion syncRotation = Quaternion.identity;
 		Vector3 syncVelocity = Vector3.zero;
 		Vector3 syncAngularVelocity = Vector3.zero;
-		int syncLife = life;
-
 		if (stream.isWriting)
 		{
-
-			stream.Serialize(ref syncLife);
-
-			syncPosition = transform.position;
+			syncPosition = rigidbody.position;
 			stream.Serialize(ref syncPosition);
 			
 			
-			syncRotation = transform.rotation;
+			syncRotation = rigidbody.rotation;
 			stream.Serialize(ref syncRotation);
-
-
-
+			
+			syncVelocity = rigidbody.velocity;
+			stream.Serialize(ref syncVelocity);
+			
+			syncAngularVelocity = rigidbody.angularVelocity;
+			stream.Serialize(ref syncAngularVelocity);
 
 		}
 		else
 		{
-
-			stream.Serialize(ref syncLife);
 			stream.Serialize(ref syncPosition);
-			stream.Serialize(ref syncRotation); 
-
-
-
-			life = syncLife;
-			syncTime = 0f;
-			syncDelay = Time.time - lastSynchronizationTime;
-			lastSynchronizationTime = Time.time;
+			stream.Serialize(ref syncRotation);
 			
-			syncStartPosition = transform.position;
-			syncEndPosition = syncPosition;
+			stream.Serialize(ref syncVelocity);
+			stream.Serialize(ref syncAngularVelocity);
 			
-			syncStartRotation = transform.rotation;
-			syncEndRotation = syncRotation;
+			rigidbody.rotation = syncRotation;
+			rigidbody.position = syncPosition;
 
-
+			rigidbody.velocity = syncVelocity;
+			rigidbody.angularVelocity = syncAngularVelocity;
+			
 		}
 	}
     
@@ -97,7 +88,7 @@ public class AICatapult : AIPathFinder
     public override void Update ()
     {
 
-
+		
 		if(Network.isClient){
 			syncTime += Time.deltaTime;
 			transform.position = Vector3.Lerp(syncStartPosition, syncEndPosition, syncTime / syncDelay);

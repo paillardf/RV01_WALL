@@ -289,7 +289,7 @@ public class AIKnight : AIPathFinder
    private void attack(){
 		
 		if(hitTarget!=null&&life>0){
-			if (!Network.isClient){
+			if (!Network.isClient&&!Network.isClient){
 				hitTarget.SendMessage("hitReceived" , 5);
 			}else{
 				object[] args = new object[1];

@@ -113,10 +113,10 @@ public class Player : MonoBehaviour {
 		life -= value;
 		if(life<0){
 			anim.SetBool(hash.deathBool, true);
-			if (!Network.isClient || Network.isServer){
+			if (!Network.isClient && !Network.isServer){
 				GameObject.FindGameObjectWithTag("GameController").SendMessage("GameOver");
 			}else{
-				GameObject.FindGameObjectWithTag("GameController").networkView.RPC("GameOver", RPCMode.Server);
+				GameObject.FindGameObjectWithTag("GameController").networkView.RPC("GameOver", RPCMode.All);
 			}
 		}
 	}
