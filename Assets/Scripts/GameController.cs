@@ -59,6 +59,15 @@ public class GameController : MonoBehaviour {
 				
 				
 			}
+
+			if (GUI.Button(new Rect(530,30,200,60), "Exit game")) {
+				
+				Network.Disconnect();
+				hasplayer = false;
+				menu = false;
+				Application.Quit();
+			}
+
 			if(gameOver){
 				GUI.Label(new Rect(300, 200, 200, 60), "Game Over");
 
