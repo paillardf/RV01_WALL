@@ -218,7 +218,7 @@ public class AIKnight : AIPathFinder
 					if(hitColliders.Length>0) {	
 						hitTarget = hitColliders[0].gameObject;
 					}
-					if(hitTarget!=null){
+					if(hitTarget==null){
 						hitColliders = Physics.OverlapSphere(transform.position+transform.up, 1.3f, Constants.MaskBlock);
 						for(int i = 0; i < hitColliders.Length; i++){
 							if(hitColliders[i].tag == "Target"){
@@ -229,7 +229,7 @@ public class AIKnight : AIPathFinder
 						}
 					}
 
-					if(hitTarget!=null){
+					if(hitTarget==null){
 						hitColliders = Physics.OverlapSphere(transform.position+transform.up, 1f, Constants.MaskBlock);
 						if(hitColliders.Length>0) {	
 							hitTarget = hitColliders[0].gameObject;
@@ -246,7 +246,7 @@ public class AIKnight : AIPathFinder
 					if(hitColliders.Length>0) {	
 						hitTarget = hitColliders[0].gameObject;
 					}
-					if(hitTarget!=null){
+					if(hitTarget==null){
 						hitColliders = Physics.OverlapSphere(transform.position+transform.up, 1.3f, Constants.MaskBlock);
 						for(int i = 0; i < hitColliders.Length; i++){
 							if(hitColliders[i].tag == "Target"){
