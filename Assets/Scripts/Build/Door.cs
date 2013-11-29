@@ -3,7 +3,7 @@ using System.Collections;
 
 public class Door : AbstractObject {
 	override
-	 public void rotate(){
+	public void rotate(){
 	
 		switch(rotationState){
 			case 0:
@@ -40,5 +40,4 @@ public class Door : AbstractObject {
 		}
 		return false;
 	}
-	
 }

@@ -11,14 +11,15 @@ GameObject:
   - 33: {fileID: 3300000}
   - 23: {fileID: 2300000}
   - 64: {fileID: 6400000}
-  - 114: {fileID: 11400000}
-  - 114: {fileID: 11400002}
+  - 114: {fileID: 11400006}
   - 114: {fileID: 11400004}
   - 54: {fileID: 5400000}
   - 148: {fileID: 14800000}
+  - 114: {fileID: 11400002}
+  - 114: {fileID: 11400000}
   m_Layer: 8
   m_Name: DoorBlock
-  m_TagString: Target
+  m_TagString: door
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -32,8 +33,8 @@ GameObject:
   m_Component:
   - 4: {fileID: 400002}
   m_Layer: 0
-  m_Name: DoorRotationPoint
-  m_TagString: Untagged
+  m_Name: Hinge
+  m_TagString: door
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -44,8 +45,8 @@ Transform:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 100000}
-  m_LocalRotation: {x: 0, y: -.0162112527, z: 0, w: -.999868631}
-  m_LocalPosition: {x: 1, y: 2, z: 5}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: .346751213, y: .0900088474, z: 6.08742428}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 400002}
@@ -56,8 +57,8 @@ Transform:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 100002}
-  m_LocalRotation: {x: 0, y: .0162112527, z: -0, w: -.999868631}
-  m_LocalPosition: {x: .997043014, y: -1, z: .107378639}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 1, y: .038661249, z: .0749998093}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 400000}
@@ -79,6 +80,9 @@ Renderer:
   m_UseLightProbes: 0
   m_LightProbeAnchor: {fileID: 0}
   m_ScaleInLightmap: 1
+  m_SortingLayer: 0
+  m_SortingOrder: 0
+  m_SortingLayerID: 0
 --- !u!33 &3300000
 MeshFilter:
   m_ObjectHideFlags: 1
@@ -122,10 +126,11 @@ MonoBehaviour:
   m_GameObject: {fileID: 100000}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: cce358ba778d2be49b960c16844261ae, type: 3}
+  m_Script: {fileID: 11500000, guid: ab4ab4311f4d5d74b8c82ee3ef925c2e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  material: {fileID: 2100000, guid: 0cfc6f5c4605f844ea778b3014490c25, type: 2}
+  Pivot: {fileID: 400002}
+  OpenSpeed: 3
 --- !u!114 &11400002
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -157,6 +162,19 @@ MonoBehaviour:
   sphereObject: {fileID: 0}
   sphereObjectRadius: 0
   useUpdateFunction: 0
+--- !u!114 &11400006
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 100000}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: cce358ba778d2be49b960c16844261ae, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  life: 15
+  material: {fileID: 2100000, guid: 0cfc6f5c4605f844ea778b3014490c25, type: 2}
 --- !u!148 &14800000
 NetworkView:
   m_ObjectHideFlags: 1
@@ -165,7 +183,7 @@ NetworkView:
   m_GameObject: {fileID: 100000}
   m_Enabled: 1
   m_StateSynchronization: 1
-  m_Observed: {fileID: 11400000}
+  m_Observed: {fileID: 11400006}
   m_ViewID:
     m_ID: 0
     m_Type: 0

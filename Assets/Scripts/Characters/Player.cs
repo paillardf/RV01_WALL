@@ -3,21 +3,35 @@ using System.Collections;
 
 public class Player : MonoBehaviour {
 
-	public int life = 100;
-	public float sensitivityX = 15F;
+	public int    life = 100;
+	public float  sensitivityX = 15F;
+	public float  maxDoorDistance = 4;
 	private HashIDs hash;
 	private Animator anim;
+	private Camera playerCamera;
 	// Use this for initialization
 	void Start () {
 
 		anim = GetComponent<Animator>();
 		hash = GameObject.FindGameObjectWithTag("GameController").GetComponent<HashIDs>();
+		playerCamera = GetComponentInChildren<Camera>();
 	}
 	
 	// Update is called once per frame
 	void Update () {
 		if (!Network.isClient && !Network.isServer||networkView.isMine){
 			transform.Rotate(0, Input.GetAxis("Mouse X") * sensitivityX, 0);
+
+			if(Input.GetButton("Door")) {
+				RaycastHit hit = new RaycastHit();
+				if(Physics.Raycast(playerCamera.transform.position, playerCamera.transform.forward, out hit, 500)) {
+					if(hit.collider.gameObject.CompareTag("door") && hit.distance <= maxDoorDistance) {
+						GameObject test = hit.collider.gameObject;
+						hit.collider.gameObject.SendMessageUpwards("interact");
+					}
+				}
+			}
+
 		}else if(syncStartPosition!=Vector3.zero){
 			syncTime += Time.deltaTime;
 			transform.position = Vector3.Lerp(syncStartPosition, syncEndPosition, syncTime / syncDelay);
