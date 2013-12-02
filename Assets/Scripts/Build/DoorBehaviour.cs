@@ -6,7 +6,6 @@ public class DoorBehaviour : MonoBehaviour {
 	public  float     OpenSpeed = 3;
 	private bool      isOpened = false;
 	private bool      isBroken = false;
-	// TODO : cas où la porte a changé de place
 	private bool      isMoving = false;
 	private float     m_minAngle;
 	private float     m_maxAngle;
@@ -22,6 +21,12 @@ public class DoorBehaviour : MonoBehaviour {
 	}
 
 	public void Update() {
+		if(isBroken) {
+			return;
+		}
+		if(!rigidbody.velocity.Equals(Vector3.zero)) {
+			isBroken = true;
+		}
 		if(isOpened && transform.eulerAngles.y < m_maxAngle) {
 			transform.RotateAround(Pivot.position, Pivot.up, OpenSpeed);
 			if(transform.eulerAngles.y > m_maxAngle) {

@@ -131,6 +131,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Pivot: {fileID: 400002}
   OpenSpeed: 3
+  isOpened: 0
 --- !u!114 &11400002
 MonoBehaviour:
   m_ObjectHideFlags: 1
