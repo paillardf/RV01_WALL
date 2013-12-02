@@ -8,22 +8,31 @@ public class DoorBehaviour : MonoBehaviour {
 	private bool      isBroken = false;
 	// TODO : cas où la porte a changé de place
 	private bool      isMoving = false;
+	private float     m_minAngle;
+	private float     m_maxAngle;
 
-	private static Quaternion s_closed = Quaternion.Euler(0, 0, 0);
-	private static Quaternion s_opened = Quaternion.Euler(0, 90, 0);
+	private Quaternion m_closed;
+	private Quaternion m_opened;
+
+	public void Start() {
+		m_minAngle = transform.rotation.eulerAngles.y;
+		m_maxAngle = m_minAngle + 90;
+		m_closed = transform.rotation;
+     	m_opened = Quaternion.Euler(0, m_maxAngle, 0);
+	}
 
 	public void Update() {
-		if(isOpened && transform.eulerAngles.y < 90) {
+		if(isOpened && transform.eulerAngles.y < m_maxAngle) {
 			transform.RotateAround(Pivot.position, Pivot.up, OpenSpeed);
-			if(transform.eulerAngles.y > 90) {
-				transform.rotation = s_opened;
+			if(transform.eulerAngles.y > m_maxAngle) {
+				transform.rotation = m_opened;
 			}
 			isMoving = true;
 		}
-		else if(!isOpened && transform.eulerAngles.y > 0) {
+		else if(!isOpened && transform.eulerAngles.y > m_minAngle) {
 			transform.RotateAround(Pivot.position, -Pivot.up, OpenSpeed);
-			if(transform.eulerAngles.y > 90) {
-				transform.rotation = s_closed;
+			if(transform.eulerAngles.y > m_maxAngle) {
+				transform.rotation = m_closed;
 			}
 			isMoving = true;
 		}
