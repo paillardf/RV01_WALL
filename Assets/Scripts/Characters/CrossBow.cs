@@ -20,6 +20,7 @@ public class CrossBow : MonoBehaviour {
 		if (!Network.isClient && !Network.isServer||networkView.isMine){
 			if(Input.GetKeyDown(KeyCode.Mouse0)){
 				fire ();
+				audio.Play();
 			}
 
 
