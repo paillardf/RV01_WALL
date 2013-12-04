@@ -3,18 +3,23 @@ using System.Collections;
 
 public class Player : MonoBehaviour {
 
-	public int    life = 100;
-	public float  sensitivityX = 15F;
-	public float  maxDoorDistance = 4;
-	private HashIDs hash;
-	private Animator anim;
-	private Camera playerCamera;
+	public int       life = 100;
+	public float     sensitivityX = 15F;
+	public float     maxDoorDistance = 4;
+	public AudioClip grassFootsteps;
+	public AudioClip blockFootsteps;
+
+	private HashIDs     hash;
+	private Animator    anim;
+	private Camera      playerCamera;
+	private AudioSource audioSource;
+
 	// Use this for initialization
 	void Start () {
-
 		anim = GetComponent<Animator>();
 		hash = GameObject.FindGameObjectWithTag("GameController").GetComponent<HashIDs>();
 		playerCamera = GetComponentInChildren<Camera>();
+		audioSource = gameObject.AddComponent<AudioSource>();
 	}
 	
 	// Update is called once per frame
@@ -135,6 +140,24 @@ public class Player : MonoBehaviour {
 		}
 	}
 
-
+	public void OnControllerColliderHit(ControllerColliderHit hit) {
+		bool isMoving = hit.controller.velocity != Vector3.zero; 
+		bool isStepping = (hit.controller.collisionFlags & CollisionFlags.CollidedBelow) != 0;
+		if(isMoving && isStepping) {
+			// Play foot step sound
+			if(!audioSource.isPlaying) {
+				if(hit.collider.name.Equals("Terrain")) {
+					audioSource.clip = grassFootsteps;
+				}
+				else {
+					audioSource.clip = blockFootsteps;
+				}
+				audioSource.Play();
+			}
+			else{
+				Debug.Log(hit.collider.tag);
+			}
+		}
+	}
 
 }
