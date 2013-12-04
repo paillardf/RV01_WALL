@@ -794,6 +794,7 @@ GameObject:
   - 114: {fileID: 11400002}
   - 143: {fileID: 14300000}
   - 148: {fileID: 14800000}
+  - 114: {fileID: 11400004}
   m_Layer: 0
   m_Name: Bot knight
   m_TagString: Enemy
@@ -2000,6 +2001,19 @@ MonoBehaviour:
   closestOnPathCheck: 1
   life: 20
   climbingValue: .600000024
+--- !u!114 &11400004
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 100104}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 752977b0cbfdc804684126e656839d6b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  grassFootsteps: {fileID: 8300000, guid: 82d782a0caf675b47bfdca5f6df45ef0, type: 3}
+  blockFootsteps: {fileID: 8300000, guid: 5b4753e09990e35469e33cd699c1eadc, type: 3}
 --- !u!137 &13700000
 SkinnedMeshRenderer:
   m_ObjectHideFlags: 1
