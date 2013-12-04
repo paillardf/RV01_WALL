@@ -3464,7 +3464,7 @@ MonoBehaviour:
   life: 100
   sensitivityX: 15
   maxDoorDistance: 5
-  grassFootsteps: {fileID: 8300000, guid: 5b4753e09990e35469e33cd699c1eadc, type: 3}
+  grassFootsteps: {fileID: 8300000, guid: 82d782a0caf675b47bfdca5f6df45ef0, type: 3}
   blockFootsteps: {fileID: 8300000, guid: 5b4753e09990e35469e33cd699c1eadc, type: 3}
 --- !u!114 &11400012
 MonoBehaviour:

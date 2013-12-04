@@ -146,7 +146,7 @@ public class Player : MonoBehaviour {
 		if(isMoving && isStepping) {
 			// Play foot step sound
 			if(!audioSource.isPlaying) {
-				if(hit.collider.name.Equals("Terrain")) {
+				if(hit.collider.name.Equals("Island")) {
 					audioSource.clip = grassFootsteps;
 				}
 				else {
