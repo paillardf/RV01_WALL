@@ -816,6 +816,7 @@ GameObject:
   - 114: {fileID: 11400000}
   - 148: {fileID: 14800000}
   - 114: {fileID: 11400010}
+  - 114: {fileID: 11400020}
   m_Layer: 9
   m_Name: player knight
   m_TagString: Player
@@ -3523,8 +3524,6 @@ MonoBehaviour:
   life: 100
   sensitivityX: 15
   maxDoorDistance: 5
-  grassFootsteps: {fileID: 8300000, guid: 82d782a0caf675b47bfdca5f6df45ef0, type: 3}
-  blockFootsteps: {fileID: 8300000, guid: 5b4753e09990e35469e33cd699c1eadc, type: 3}
 --- !u!114 &11400012
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -3592,6 +3591,19 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   sensitivityY: .0199999996
+--- !u!114 &11400020
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 100106}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 752977b0cbfdc804684126e656839d6b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  grassFootsteps: {fileID: 8300000, guid: 82d782a0caf675b47bfdca5f6df45ef0, type: 3}
+  blockFootsteps: {fileID: 8300000, guid: 5b4753e09990e35469e33cd699c1eadc, type: 3}
 --- !u!124 &12400000
 Behaviour:
   m_ObjectHideFlags: 1
