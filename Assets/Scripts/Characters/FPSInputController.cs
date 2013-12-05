@@ -22,7 +22,7 @@ public class FPSInputController : MonoBehaviour {
 	void Update () {
 		if (!Network.isClient && !Network.isServer||networkView.isMine){
 			
-			// Get the input vector from kayboard or analog stick
+			// Get the input vector from keyboard or analog stick
 			Vector3 directionVector = new Vector3(Input.GetAxis("Horizontal"), 0, Input.GetAxis("Vertical"));
 			m_animator.SetFloat(hash.directionFloat, directionVector.x);
 			m_animator.SetFloat(hash.speedFloat, directionVector.z);
