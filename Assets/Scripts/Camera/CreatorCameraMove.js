@@ -58,6 +58,7 @@ function LateUpdate () {
 	 		 
 	        
 	   }
+	   var dir : Vector3;
 	   if (Input.GetKey (KeyCode.UpArrow)||Input.GetKey (KeyCode.Z)){
 	    dir = Camera.main.transform.forward;
 	    dir.y = 0;
