@@ -1,5 +1,6 @@
 ﻿using UnityEngine;
 using System.Collections;
+using MiddleVR_Unity3D;
 
 public class FPSInputController : MonoBehaviour {
 
@@ -21,9 +22,19 @@ public class FPSInputController : MonoBehaviour {
 	// Update is called once per frame
 	void Update () {
 		if (!Network.isClient && !Network.isServer||networkView.isMine){
-			
-			// Get the input vector from keyboard or analog stick
-			Vector3 directionVector = new Vector3(Input.GetAxis("Horizontal"), 0, Input.GetAxis("Vertical"));
+			Vector3 directionVector;
+
+			if(MiddleVR.VRDeviceMgr != null) {
+				// Get the input vector from Razer Hydra
+				vrAxis axis = MiddleVR.VRDeviceMgr.GetAxis("RazerHydra.JoyStick0.Axis");
+				directionVector = new Vector3(axis.GetValue(0), 0, axis.GetValue(2));
+				motor.inputJump = MiddleVR.VRDeviceMgr.GetButtons().IsPressed(6);
+			}
+			else {
+				// Get the input vector from keyboard
+				directionVector = new Vector3(Input.GetAxis("Horizontal"), 0, Input.GetAxis("Vertical"));
+				motor.inputJump = Input.GetButton("Jump");
+			}
 			m_animator.SetFloat(hash.directionFloat, directionVector.x);
 			m_animator.SetFloat(hash.speedFloat, directionVector.z);
 			
@@ -46,7 +57,6 @@ public class FPSInputController : MonoBehaviour {
 			
 			// Apply the direction to the CharacterMotor
 			motor.inputMoveDirection = transform.rotation * directionVector;
-			motor.inputJump = Input.GetButton("Jump");
 		}
 	}
 

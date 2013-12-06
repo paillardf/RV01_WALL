@@ -245,7 +245,7 @@ MonoBehaviour:
   WandButton4: 0
   WandButton5: 0
   DeltaTime: 0
-  ConfigFile: c:\config.vrx
+  ConfigFile: \config.vrx
   RootNode: {fileID: 0}
   TemplateCamera: {fileID: 0}
   ShowWand: 1
