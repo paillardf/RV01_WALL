@@ -18,8 +18,7 @@ public class CrossBow : MonoBehaviour {
 
 	void Update(){
 		if (!Network.isClient && !Network.isServer||networkView.isMine){
-			if((MiddleVR.VRDeviceMgr != null && MiddleVR.VRDeviceMgr.GetButtons().IsPressed(0))
-			   || Input.GetKeyDown(KeyCode.Mouse0)){
+			if( Input.GetKeyDown(KeyCode.Mouse0)){
 				fire ();
 				audio.Play();
 			}

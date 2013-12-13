@@ -23,8 +23,7 @@ public class Player : MonoBehaviour {
 		if (!Network.isClient && !Network.isServer||networkView.isMine){
 			transform.Rotate(0, Input.GetAxis("Mouse X") * sensitivityX, 0);
 
-			if((MiddleVR.VRDeviceMgr != null && MiddleVR.VRDeviceMgr.GetButtons().IsPressed(1))
-			   || Input.GetButton("Door")) {
+			if(Input.GetButton("Door")) {
 				RaycastHit hit = new RaycastHit();
 				if(Physics.Raycast(playerCamera.transform.position, playerCamera.transform.forward, out hit, 500)) {
 					if(hit.collider.gameObject.CompareTag("door") && hit.distance <= maxDoorDistance) {

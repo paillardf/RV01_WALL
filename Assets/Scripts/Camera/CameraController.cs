@@ -1,6 +1,5 @@
 ﻿using UnityEngine;
 using System.Collections;
-using MiddleVR_Unity3D;
 
 public class CameraController : MonoBehaviour {
 	public Camera playerCamera;
@@ -9,12 +8,14 @@ public class CameraController : MonoBehaviour {
 	void Update () {
 		if (!Network.isClient && !Network.isServer||networkView.isMine) {
 			float angle;
-			if(MiddleVR.VRDeviceMgr != null) {
+			/*
+			 * if(MiddleVR.VRDeviceMgr != null) {
 				angle = MiddleVR.VRDeviceMgr.GetAxis("RazerHydra.JoyStick1.Axis").GetValue(0);
 			}
-			else {
+			
+			else {*/
 				angle = Input.GetAxis("HorizontalCamera");
-			}
+			//}
 			if(angle != 0) {
 				gameObject.transform.Rotate(Vector3.up, angle * rotationSpeed);
 			}
