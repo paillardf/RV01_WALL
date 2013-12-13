@@ -3508,6 +3508,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3ec5210fe0e6e294487c50e047383b20, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  Hand: 2
+  Sensitivity: {x: .00100000005, y: .00100000005, z: .00100000005}
   leftHand: {fileID: 400184}
 --- !u!114 &11400006
 MonoBehaviour:
@@ -3619,6 +3621,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 13d14a743090c9c45ab4bbc4d5c4798b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  Hand: 1
+  Sensitivity: {x: .00100000005, y: .00100000005, z: .00100000005}
   sensitivityY: .0199999996
 --- !u!114 &11400020
 MonoBehaviour:

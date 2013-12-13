@@ -1,7 +1,7 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public class RightHand : MonoBehaviour {
+public class RightHand : SixenseObjectController {
 
 
 	public Transform leftHand;
@@ -14,6 +14,10 @@ public class RightHand : MonoBehaviour {
 	// Update is called once per frame
 	void Update () {
 		if (!Network.isClient && !Network.isServer||networkView.isMine){
+			SixenseInput.Controller controller = SixenseInput.GetController(SixenseHands.RIGHT);
+			if(controller != null) {
+				UpdateObject(controller);
+			}
 			transform.LookAt(leftHand);
 		}
 
