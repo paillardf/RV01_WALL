@@ -8,14 +8,15 @@ public class CameraController : MonoBehaviour {
 	void Update () {
 		if (!Network.isClient && !Network.isServer||networkView.isMine) {
 			float angle;
-			/*
-			 * if(MiddleVR.VRDeviceMgr != null) {
-				angle = MiddleVR.VRDeviceMgr.GetAxis("RazerHydra.JoyStick1.Axis").GetValue(0);
+
+			SixenseInput.Controller controller = SixenseInput.GetController(SixenseHands.RIGHT);
+			if(controller != null) {
+				angle = controller.JoystickX;
 			}
 			
-			else {*/
+			else {
 				angle = Input.GetAxis("HorizontalCamera");
-			//}
+			}
 			if(angle != 0) {
 				gameObject.transform.Rotate(Vector3.up, angle * rotationSpeed);
 			}

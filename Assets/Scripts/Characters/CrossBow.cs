@@ -18,12 +18,12 @@ public class CrossBow : MonoBehaviour {
 
 	void Update(){
 		if (!Network.isClient && !Network.isServer||networkView.isMine){
-			if( Input.GetKeyDown(KeyCode.Mouse0)){
-				fire ();
+			SixenseInput.Controller controller = SixenseInput.GetController(SixenseHands.LEFT);
+			if(controller != null && controller.GetButtonDown(SixenseButtons.TRIGGER)
+			   || Input.GetKeyDown(KeyCode.Mouse0)) {
+				fire();
 				audio.Play();
 			}
-
-
 		}
 
 	}

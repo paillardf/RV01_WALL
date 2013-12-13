@@ -22,19 +22,19 @@ public class FPSInputController : MonoBehaviour {
 	void Update () {
 		if (!Network.isClient && !Network.isServer||networkView.isMine){
 			Vector3 directionVector;
-			/*
-			if(MiddleVR.VRDeviceMgr != null) {
+
+			SixenseInput.Controller controller = SixenseInput.GetController(SixenseHands.LEFT);
+			if(controller != null) {
 				// Get the input vector from Razer Hydra
-				vrAxis axis = MiddleVR.VRDeviceMgr.GetAxis("RazerHydra.JoyStick0.Axis");
-				directionVector = new Vector3(axis.GetValue(0), 0, axis.GetValue(2));
-				motor.inputJump = MiddleVR.VRDeviceMgr.GetButtons().IsPressed(6);
+				directionVector = new Vector3(controller.JoystickX, 0, controller.JoystickY);
+				motor.inputJump = controller.GetButtonDown(SixenseButtons.BUMPER);
 			}
 			else {
-			*/
+			
 				// Get the input vector from keyboard
 				directionVector = new Vector3(Input.GetAxis("Horizontal"), 0, Input.GetAxis("Vertical"));
 				motor.inputJump = Input.GetButton("Jump");
-			//}
+			}
 			m_animator.SetFloat(hash.directionFloat, directionVector.x);
 			m_animator.SetFloat(hash.speedFloat, directionVector.z);
 			
