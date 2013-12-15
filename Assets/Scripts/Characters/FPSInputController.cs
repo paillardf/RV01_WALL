@@ -20,7 +20,7 @@ public class FPSInputController : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
-		if (!Network.isClient && !Network.isServer||networkView.isMine){
+		if ((!Network.isClient && !Network.isServer)||networkView.isMine){
 			Vector3 directionVector;
 
 			SixenseInput.Controller controller = SixenseInput.GetController(SixenseHands.LEFT);
