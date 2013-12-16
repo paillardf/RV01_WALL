@@ -7,10 +7,13 @@ public class Player : MonoBehaviour {
 	public float     sensitivityX = 15F;
 	public float     maxDoorDistance = 4;
 	public AudioClip hitReceivedSound;
+	public GameObject cam;
+	public GameObject oculusCam;
+	public Transform head;
 
 	private HashIDs     hash;
 	private Animator    anim;
-	private Camera      playerCamera;
+	private Transform   playerCamera;
 	private AudioSource audioSource;
 
 	// Use this for initialization
@@ -19,16 +22,27 @@ public class Player : MonoBehaviour {
 		hash = GameObject.FindGameObjectWithTag("GameController").GetComponent<HashIDs>();
 		playerCamera = GetComponentInChildren<Camera>();
 		audioSource = gameObject.AddComponent<AudioSource>();
+
+		if ((!Network.isClient && !Network.isServer)||networkView.isMine){
+			if(OVRDevice.SensorCount>0){
+				oculusCam.SetActive(true);
+				playerCamera = oculusCam.GetComponentInChildren<Camera>().transform;
+			}else{
+				cam.SetActive(true);
+				playerCamera = cam.transform;
+			}
+		}
 	}
 	
 	// Update is called once per frame
 	void Update () {
-		if (!Network.isClient && !Network.isServer||networkView.isMine){
+		if ((!Network.isClient && !Network.isServer)||networkView.isMine){
+
 			transform.Rotate(0, Input.GetAxis("Mouse X") * sensitivityX, 0);
 
 			if(Input.GetButton("Door")) {
 				RaycastHit hit = new RaycastHit();
-				if(Physics.Raycast(playerCamera.transform.position, playerCamera.transform.forward, out hit, 500)) {
+				if(Physics.Raycast(playerCamera.position, playerCamera.forward, out hit, 500)) {
 					if(hit.collider.gameObject.CompareTag("door") && hit.distance <= maxDoorDistance) {
 						GameObject test = hit.collider.gameObject;
 						hit.collider.gameObject.SendMessageUpwards("interact");
@@ -42,9 +56,18 @@ public class Player : MonoBehaviour {
 			transform.rotation = Quaternion.Lerp(syncStartRotation, syncEndRotation, syncTime / syncDelay);
 		}
 	}
+
+	void LateUpdate () {
+		if ((!Network.isClient && !Network.isServer)||networkView.isMine){
+			head.localRotation = playerCamera.localRotation;
+			// Fixes the head orientation
+			head.localRotation = new Quaternion(-head.localRotation.y, head.localRotation.z, -head.localRotation.x, head.localRotation.w);
+		}
+	}
+
 	void OnGUI(){
 		if (!Network.isClient && !Network.isServer||networkView.isMine){
-			GUI.Label(new Rect(20,20,200,100) , "Life :"+life);
+			GUI.Label(new Rect(40,40,200,100) , "Life :"+life);
 		}
 
 	}
