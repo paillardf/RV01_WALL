@@ -6,16 +6,19 @@ public class Player : MonoBehaviour {
 	public int       life = 100;
 	public float     sensitivityX = 15F;
 	public float     maxDoorDistance = 4;
+	public AudioClip hitReceivedSound;
 
 	private HashIDs     hash;
 	private Animator    anim;
 	private Camera      playerCamera;
+	private AudioSource audioSource;
 
 	// Use this for initialization
 	void Start () {
 		anim = GetComponent<Animator>();
 		hash = GameObject.FindGameObjectWithTag("GameController").GetComponent<HashIDs>();
 		playerCamera = GetComponentInChildren<Camera>();
+		audioSource = gameObject.AddComponent<AudioSource>();
 	}
 	
 	// Update is called once per frame
@@ -126,6 +129,8 @@ public class Player : MonoBehaviour {
 	[RPC]
 	public void hitReceived(int value){
 		life -= value;
+		audioSource.clip = hitReceivedSound;
+		audioSource.Play();
 		if(life<0){
 			anim.SetBool(hash.deathBool, true);
 			if (!Network.isClient && !Network.isServer){
