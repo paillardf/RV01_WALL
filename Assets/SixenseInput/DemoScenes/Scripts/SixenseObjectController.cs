@@ -36,7 +36,7 @@ public class SixenseObjectController : MonoBehaviour {
 	
 	void OnGUI()
 	{
-		if ( !m_enabled )
+		if ( SixenseInput.GetController(Hand) != null && !m_enabled )
 		{
 			GUI.Box( new Rect( Screen.width / 2 - 100, Screen.height - 40, 200, 30 ),  "Press Start To Move/Rotate" );
 		}
