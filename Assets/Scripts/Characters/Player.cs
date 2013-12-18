@@ -20,7 +20,6 @@ public class Player : MonoBehaviour {
 	void Start () {
 		anim = GetComponent<Animator>();
 		hash = GameObject.FindGameObjectWithTag("GameController").GetComponent<HashIDs>();
-		playerCamera = GetComponentInChildren<Camera>();
 		audioSource = gameObject.AddComponent<AudioSource>();
 
 		if ((!Network.isClient && !Network.isServer)||networkView.isMine){
