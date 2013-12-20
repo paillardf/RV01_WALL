@@ -26,6 +26,7 @@ public class Player : MonoBehaviour {
 			if(OVRDevice.SensorCount>0){
 				oculusCam.SetActive(true);
 				playerCamera = oculusCam.GetComponentInChildren<Camera>().transform;
+				GetComponent<MouseLook>().enabled = false;
 			}else{
 				cam.SetActive(true);
 				playerCamera = cam.transform;

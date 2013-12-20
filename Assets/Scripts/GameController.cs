@@ -39,6 +39,7 @@ public class GameController : MonoBehaviour {
 		if(Input.GetKeyDown(KeyCode.Escape)){
 			menu = !menu;
 			Screen.showCursor = menu || !isKnight;
+			Screen.lockCursor = !menu && isKnight;
 		}
 	}
 	
@@ -74,6 +75,7 @@ public class GameController : MonoBehaviour {
 				GUI.Label(new Rect(300, 300, 200, 60), "Score :" + (int)score );
 
 				Screen.showCursor = true;
+				Screen.lockCursor = false;
 			}
 		}
 
@@ -92,6 +94,7 @@ public class GameController : MonoBehaviour {
 				menuCamera.enabled = false;
 				isKnight = true;
 				Screen.showCursor = false;
+				Screen.lockCursor = true;
 				if (!Network.isClient || Network.isServer){
 					addKnight();
 				}else{
