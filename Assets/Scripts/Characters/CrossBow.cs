@@ -18,7 +18,7 @@ public class CrossBow : MonoBehaviour {
 
 	void Update(){
 		if (!Network.isClient && !Network.isServer||networkView.isMine){
-			SixenseInput.Controller controller = SixenseInput.GetController(SixenseHands.LEFT);
+			SixenseInput.Controller controller = SixenseInput.GetController(SixenseHands.RIGHT);
 			if(controller != null && controller.GetButtonDown(SixenseButtons.TRIGGER)
 			   || Input.GetKeyDown(KeyCode.Mouse0)) {
 				fire();
