@@ -40,7 +40,10 @@ public class Player : MonoBehaviour {
 
 			transform.Rotate(0, Input.GetAxis("Mouse X") * sensitivityX, 0);
 
-			if(Input.GetButton("Door")) {
+			SixenseInput.Controller controller = SixenseInput.GetController(SixenseHands.LEFT);
+
+			if((controller != null && controller.GetButtonDown(SixenseButtons.TRIGGER) 
+			    || Input.GetButton("Door")) {
 				RaycastHit hit = new RaycastHit();
 				if(Physics.Raycast(playerCamera.position, playerCamera.forward, out hit, 500)) {
 					if(hit.collider.gameObject.CompareTag("door") && hit.distance <= maxDoorDistance) {
