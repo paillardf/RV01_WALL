@@ -38,7 +38,19 @@ public class SixenseObjectController : MonoBehaviour {
 	{
 		if ( SixenseInput.GetController(Hand) != null && !m_enabled )
 		{
-			GUI.Box( new Rect( Screen.width / 2 - 100, Screen.height - 40, 200, 30 ),  "Press Start To Move/Rotate" );
+			float x = -100;
+			switch(Hand) {
+			case SixenseHands.LEFT :
+				x += Screen.width / 4;
+				break;
+			case SixenseHands.RIGHT:
+				x += 3 * Screen.width / 4;
+				break;
+			case SixenseHands.UNKNOWN :
+				x += Screen.width / 2;
+				break;
+			}
+			GUI.Box( new Rect( x, Screen.height - 40, 200, 30 ),  "Press Start To Move/Rotate" );
 		}
 	}
 	
