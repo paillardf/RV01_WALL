@@ -42,7 +42,7 @@ public class Player : MonoBehaviour {
 
 			SixenseInput.Controller controller = SixenseInput.GetController(SixenseHands.LEFT);
 
-			if((controller != null && controller.GetButtonDown(SixenseButtons.TRIGGER) 
+			if((controller != null && controller.GetButtonDown(SixenseButtons.TRIGGER))
 			    || Input.GetButton("Door")) {
 				RaycastHit hit = new RaycastHit();
 				if(Physics.Raycast(playerCamera.position, playerCamera.forward, out hit, 500)) {
