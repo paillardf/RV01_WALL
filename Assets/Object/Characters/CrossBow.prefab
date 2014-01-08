@@ -1362,7 +1362,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   arrowPrefab: {fileID: 100000, guid: afe828b8806cb9b4cbdec32784bd2cf4, type: 2}
-  power: 158
+  power: 200
 --- !u!148 &14800000
 NetworkView:
   m_ObjectHideFlags: 1
