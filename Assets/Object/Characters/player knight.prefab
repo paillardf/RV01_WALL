@@ -3761,7 +3761,7 @@ MonoBehaviour:
   life: 100
   sensitivityX: 15
   maxDoorDistance: 5
-  hitReceivedSound: {fileID: 0}
+  hitReceivedSound: {fileID: 8300000, guid: 66cd19c6983aa094ea5e1a7c7ac5c770, type: 3}
   cam: {fileID: 100090}
   oculusCam: {fileID: 100198}
   head: {fileID: 400080}
