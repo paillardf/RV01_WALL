@@ -27,7 +27,7 @@ public class FPSInputController : MonoBehaviour {
 			if(controller != null) {
 				// Get the input vector from Razer Hydra
 				directionVector = new Vector3(controller.JoystickX, 0, controller.JoystickY);
-				motor.inputJump = controller.GetButtonDown(SixenseButtons.BUMPER);
+				motor.inputJump = controller.GetButton(SixenseButtons.BUMPER);
 			}
 			else {
 			
